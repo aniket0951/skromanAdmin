@@ -1,0 +1,246 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Lead</title>
+    <link rel="stylesheet" href="/static/css/leads.css  ">
+</head>
+
+
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+        }
+
+        .form-group {
+            padding: 5px;
+            padding-bottom: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+        }
+
+        .mobile-container {
+            display: block;
+        }
+
+        .form-group {
+            padding: 5px;
+            padding-bottom: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+        }
+
+        .form-group {
+            padding: 5px;
+            padding-bottom: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+        }
+
+        .mobile-container {
+            display: block;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .parentclass {
+            width: 60%;
+            margin-left: 150px;
+            margin-top: 50px;
+            padding: 10px;
+        }
+
+        .form-group {
+            padding: 5px;
+            padding-bottom: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .parentclass {
+            width: 60%;
+            margin-left: 310px;
+            margin-top: 60px;
+            padding: 10px;
+        }
+
+        .form-group {
+            padding: 5px;
+            padding-bottom: 5px;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+
+<body>
+
+    {% block content %}
+
+    <div id="formdiv" class="container-fluid parentclass">
+        <h4 style="text-align: center;">Add New Lead</h4>
+        <form action="{% url 'leads' %}" method="post">
+            <div class="mb-3" id="dropDown1">
+                <label for="pwd" class="form-label">Lead Type</label>
+                <select id="list" class="form-select" name="lead_type" aria-label="Default select example">
+                    <option name="" id="dropOptions" selected>Indivisual</option>
+                    <option value="Builder">Builder</option>
+                </select>
+            </div>
+
+            <div class="mb-3" id="dropDown1">
+                <label for="pwd" class="form-label">Leads</label>
+                <select id="list" class="form-select" name="leads" aria-label="Default select example">
+                    <option name="" id="dropOptions" selected>Online</option>
+                    <option value="Dealer">Dealer</option>
+                    <option value="Architect">Architect</option>
+                    <option value="Builder">Builder</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" class="form-control" name="name" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Mobile Number</label>
+                <input type="number" class="form-control" name="contact" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email Id</label>
+                <input type="email" class="form-control" name="email" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Billing Address</label>
+                <input type="text" class="form-control" name="billing_address" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Shipping Address</label>
+                <input type="text" class="form-control" name="shipping_address" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group" style="display: block;">
+                <label for="exampleInputPassword1">City</label>
+                <input type="text" class="form-control" name="city" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group" style="display: block;">
+                <label for="exampleInputPassword1">Pin</label>
+                <input type="text" class="form-control" name="pin_code" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Note</label>
+                <input type="text" class="form-control" name="note_comment" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Next Follwup Date</label>
+                <input type="date" class="form-control" name="next_followup" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group" style="display: block;">
+                <label for="exampleInputPassword1">Sales User</label>
+                <input type="number" class="form-control" name="sales_user" id="clientSiteAddress">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Lead</button>
+            <a onclick="openPresentation()" class="btn btn-primary " style="text-decoration: none;">Skip</a>
+        </form>
+
+    </div>
+
+    <!-- showing video links and presentation -->
+    <div class="presentation" id="presentation" style="display: none;">
+        <div class="row">
+            <div class="column">
+                <a href="https://youtu.be/S4xvi_EEmEw">
+                    <img src="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg" alt="Snow"
+                        style="width:10%">
+                </a>
+            </div>
+            <div class="column">
+                <img src="img_forest.jpg" alt="Forest" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="img_mountains.jpg" alt="Mountains" style="width:100%">
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    <script>
+        function openPresentation() {
+            var presentation = document.getElementById('presentation');
+            var formdiv = document.getElementById('formdiv');
+
+            presentation.style.display = 'block';
+            formdiv.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+.container{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+.card{
+    margin-left: 380px;
+    margin-right: auto;
+    width: 250px;
+}
+
+.card img{
+    width: 50%;
+}
+.card .btn{
+    width: 60%;
+}
+

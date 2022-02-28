@@ -1,0 +1,392 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead</title>
+    <link rel="stylesheet" href="/static/css/bom.css">
+
+</head>
+
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+            padding-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: block;
+            width: 100%;
+        }
+
+        .parenttab {
+            display: none;
+        }
+
+        .addclientbtn {
+            display: none;
+        }
+
+        .mobilecard {
+            display: block;
+        }
+
+        .editLeadCard {
+            width: 95%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+            margin-bottom: 15px;
+        }
+
+        .navigation_bar {
+            margin-left: 0px;
+            background-color: #04aa6d;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .parenttab {
+            margin-top: 60px;
+            margin-left: 160px;
+            width: 90%;
+        }
+
+        .editLeadCard {
+            width: 70%;
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+            margin-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+            margin-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .form_class {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .card {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+</style>
+
+
+<body>
+    {% block content %}
+
+    <div class="mobile-container">
+
+        <!-- Top Navigation Menu -->
+        <div class="topnav">
+            <a href="#home" class="active1">Home</a>
+            <div id="myLinks">
+                <a href="{% url 'client_details' %}">Client</a>
+                <a href="{% url 'leadhome' %}">Lead</a>
+                <a href="{% url 'usermodes' 'openaddlead' %}">Add Lead</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="background-color: #333;">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <!-- End smartphone / tablet look -->
+    </div>
+
+    <div id="mobilecard">
+        {% for i in leads %}
+        <div class="card mobilecard">
+            <div class="container">
+                <h5>{{ i.name }}</h5>
+                <h5>{{ i.email }}</h5>
+                <h5>{{ i.contact }}</h5>
+                <h5>{{ i.city }}</h5>
+                <h5>{{ i.pin_code }}</h5>
+                <h5>Present Lead</h5>
+                <h5>{{ i.ctime }}</h5>
+                <button
+                    onclick="cardValue('{{ i.name }}', '{{ i.email }}',
+                                       '{{ i.contact }}', '{{ i.city }}',
+                                       '{{ i.pin_code }}', '{{ i.ctime }}', '{{ i.lead_type }}',
+                                       '{{ i.leads}}', '{{i.billing_address}}', '{{i.shipping_address}}' , '{{ i.id }}')"
+                    class="btn btn-primary">Edit</button>
+                <form action="{% url 'lead_notes' i.id %}" class="d-inline">
+                    <button type="submit" class="btn btn-primary">Notes</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- add member button here -->
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'usermodes' 'openaddlead' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">Add Lead</button>
+        </form>
+    </div>
+
+    <!-- show table view -->
+    <section class="parenttab" id="bomVerificationSection">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Leads</strong></a>
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Pin</th>
+                                        <th scope="col">Up Comming</th>
+                                        <th scope="col">Lead Status</th>
+                                        <th scope="col">Edit</th>
+                                        <th scope="col">Followp</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in leads %}
+                                    <tr>
+                                        <td>{{ i.ctime }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.email }}</td>
+                                        <td>{{ i.contact }}</td>
+                                        <td>{{ i.city }}</td>
+                                        <td>{{ i.pin_code }}</td>
+                                        <td>{{ i.ctime }}</td>
+                                        <td>Present Lead</td>
+                                        <td>
+                                            <button
+                                                onclick="leadEdit('{{ i.name }}', '{{ i.email }}',
+                                            '{{ i.contact }}', '{{ i.city }}',
+                                            '{{ i.pin_code }}', '{{ i.ctime }}', '{{ i.lead_type }}',
+                                            '{{ i.leads}}', '{{i.billing_address}}', '{{i.shipping_address}}' , '{{ i.id }}')"
+                                                class="btn btn-primary">Edit</button>
+
+
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'lead_notes' i.id %}" class="d-inline">
+                                                <button type="submit" class="btn btn-primary">Notes</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <h1>{{ data }}</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- edit lead layout -->
+    <div class="editLeadCard" style="display: none;" id="editLead">
+        <img onclick="openLeadDetail()"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAOZJREFUSEvt1dENgjAYBOBjA0dwAx1BN9FNdBQnUTfQDXQDRzCXtEnTtOH/j2JjAi/wQPm4aykDOh1DJxcL/LPm/67qFYA1gIdakZKY6DXAexX3whHdhqR3ADsltQfO0WdAP3PCTVG+qCVxc9QCz4KOwTnKuTwAsM7pG8CrNv+1qnNUWT9nACcFvgHYKGIYI8Ecy9QpzoqPjqpZs7vqGDTHuUVyt7LOc7Uw6+eUJm+CW+BS7ZNxK9wc98Al/BK+bffi98Ipzmv+maSFpsAR51lCx7ZMd32eAWpij1G8d4EnV2h9QLeqv/KyMB8qwdA1AAAAAElFTkSuQmCC" />
+       
+            <h5 class="card-title">Edit Lead Details</h5>
+        <form action="{% url 'lead_edit' 20 %}" method="POST">
+            <input type="hidden" name="_method" value="put">
+
+            <div class="form-group" style="display: none;">
+                <label for="exampleInputEmail1">Lead Type</label>
+                <input type="text" class="form-control" name="lead_id" id="lead_id" aria-describedby="emailHelp"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Lead Type</label>
+                <input type="text" class="form-control" name="lead_type" id="lead_type" aria-describedby="emailHelp"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lead</label>
+                <input type="text" class="form-control" name="leads" id="lead" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name</label>
+                <input type="text" class="form-control" name="name" id="l_name" aria-describedby="emailHelp" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="email" class="form-control" name="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Contact</label>
+                <input type="number" class="form-control" name="contact" id="contact" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Billing Address</label>
+                <input type="text" class="form-control" name="billing_address" id="billing_address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Shipping Address</label>
+                <input type="text" class="form-control" name="shipping_address" id="shipping_address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">City</label>
+                <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Pin</label>
+                <input type="text" class="form-control" name="pin_code" id="pin_code" required>
+            </div>
+            <button type="submit" class="btn btn-primary"> Update </button>
+        </form>
+    </div>
+
+      
+
+    {% endblock %}
+    <script src="/static/js/saleshome.js"></script>
+
+</body>
+
+</html>

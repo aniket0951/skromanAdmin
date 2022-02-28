@@ -1,0 +1,53 @@
+body {
+  background-color: green;
+  overflow: scroll;
+}
+/* add client form with check box */
+.form-group {
+  width: 80%;
+  padding: 10px;
+}
+.form-group label {
+  padding: 2px;
+}
+.sub_btn {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.form_head {
+  margin-left: 15px;
+}
+.form-check {
+  margin-left: 15px;
+  margin-top: 60px;
+  padding-bottom: 10px;
+}
+#project_div {
+  display: none;
+}
+/* for drop down of hole page */
+.form-label {
+  margin-left: 15px;
+}
+.form-select {
+  width: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.form-select #dropOptions {
+  margin-right: 15px;
+}
+#dropDown2 {
+  display: none;
+}
+.form_class{
+  margin-left: 310px;
+  margin-top: 60px;
+}
+#dropDown1{
+  width: 80%;
+  margin-left: -10px;
+}
+
+

@@ -1,0 +1,159 @@
+/* add client form with check box */
+.form-group {
+  width: 80%;
+  padding: 10px;
+}
+.form-group label {
+  padding: 2px;
+}
+.sub_btn {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.form_head {
+  margin-left: 15px;
+}
+.form-check {
+  margin-left: 15px;
+  margin-top: 60px;
+  padding-bottom: 10px;
+}
+#project_div {
+  display: none;
+}
+/* for drop down of hole page */
+.form-label {
+  margin-left: 15px;
+}
+.form-select {
+  width: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.form-select #dropOptions {
+  margin-right: 15px;
+}
+#dropDown2 {
+  display: none;
+}
+
+/* side bar or side menu bar */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 150px;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {
+    float: left;
+  }
+  div.content {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+/* mobile side or side bar for tab view */
+.mobile-container {
+  max-width: 100%;
+  margin: auto;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  float: left;
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.icon {
+  float: right;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #04aa6d;
+  color: white;
+}
+
+/* card view for mobile screen */
+.card {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+.card .container button {
+  margin-bottom: 10px;
+}
+.card .container .delete_btn {
+  background-color: red;
+}
+.card .container button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* navigation bar header */
+.navigation_bar {
+  margin-left: 160px;
+  background-color: #04aa6d;
+}

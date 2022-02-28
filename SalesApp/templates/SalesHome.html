@@ -1,0 +1,287 @@
+{% include 'CommonTemp.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Home</title>
+    <link rel="stylesheet" href="/static/css/bom.css">
+
+</head>
+
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+            padding-bottom: 15px;
+        }
+
+        .navigation_bar {
+            display: none;
+        }
+
+        .mobile-container {
+            display: block;
+            width: 100%;
+        }
+
+        .sidebar {
+            display: none;
+        }
+
+        #editLead {
+            display: none;
+        }
+
+        .table_div {
+            display: none;
+        }
+
+        .parenttab {
+            display: none;
+        }
+
+        .addclientbtn {
+            display: none;
+        }
+
+        .procced_btn {
+            background-color: green;
+        }
+
+        .mobilecard {
+            display: block;
+
+        }
+
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+        }
+
+        .navigation_bar {
+            margin-left: 0px;
+            background-color: #04aa6d;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+            /* margin-left: 10px; */
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+            /* margin-left: 10px; */
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .form_class {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .card {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+</style>
+
+
+<body>
+
+    {% block content %}
+
+    <div class="mobile-container">
+
+        <!-- Top Navigation Menu -->
+        <div class="topnav">
+            <a href="#home" class="active1">Home</a>
+            <div id="myLinks">
+                <a href="{% url 'leadhome' %}">Lead</a>
+                <a href="{% url 'usermodes' 'opennewclient' %}">Add New Client</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="background-color: #333;">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <!-- End smartphone / tablet look -->
+    </div>
+    {% for i in client_data %}
+    <div class="card mobilecard">
+        <div class="container">
+            <h5>{{ i.name }}</h5>
+            <h4>{{ i.email }}</h4>
+            <h4>{{ i.city }}</h4>
+            <h4>{{ i.contact }}</h4>
+            <h4>{{ i.c_type }}</h4>
+            <h4>{{ i.ctime }}</h4>
+            <form action="{% url 'edu_client' i.id %}">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- add member button here -->
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'usermodes' 'opennewclient' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">Add Client</button>
+        </form>
+    </div>
+
+    <!-- show client data in table format -->
+    <section class="parenttab" id="bomVerificationSection">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Client Details</strong></a>
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Client Id</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in client_data %}
+                                    <tr>
+                                        <td>{{ i.id }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.email }}</td>
+                                        <td>{{ i.city }}</td>
+                                        <td>{{ i.contact }}</td>
+                                        <td>{{ i.ctime }}</td>
+                                        <td>
+                                        <form action="{% url 'edu_client' i.id %}">
+                                            <button type="submit" class="btn btn-primary" >Edit</button>
+                                        </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+  
+
+    {% endblock %}
+    <script src="/static/js/saleshome.js"></script>
+</body>
+
+</html>

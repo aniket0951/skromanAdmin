@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/Media.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+    <script
+        src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+    <script src="extensions/mobile/bootstrap-table-mobile.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            background-color: red;
+        }
+        .navigation_bar{
+            display: none;
+        }
+        .table_header {
+            margin-left: 60px;
+            height: 240px;
+        }
+        .graph_card {
+            margin-left: 20px;
+            width: 210px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+        }
+
+        .table_header {
+            margin-left: 160px;
+            height: 240px;
+        }
+
+        .graph_card {
+            margin-left: 20px;
+            width: 210px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        .navigation_bar{
+            display: none;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+        }
+
+        .parent_card {
+            margin-left: 20px;
+        }
+
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+        }
+
+        .parent_card {
+            margin-left: 40px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+    }
+</style>
+
+<body style="background-color: #cee1ed;">
+    <!-- sidebar with options -->
+    <div class="sidebar">
+        <a class="active" href="#home">HOME</a>
+        <a href="{% url 'allUsers' %}">CREATE USER</a>
+        <a href="#contact">LEADS</a>
+        <a href="#about">TRACK</a>
+        <a href="{% url 'testFuns' %}">SALES</a>
+        <a href="{% url 'openInvantory' %}">INVANTORY</a>
+        <a href="{% url 'production_home' %}">PRODUCTION</a>
+        <a href="#about">ACCOUNT</a>
+        <a href="#about">INSTALLATION</a>
+
+    </div>
+
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-sm navbar-dark navigation_bar">
+        <div class="container-fluid">
+            <h4 style="color: white; font-family: 'Poppins';">Skroman Support</h4>
+            <a class="navbar-brand" href="#" style="float: right;">
+                <img src="/static/image/skromanlogo.jpeg" alt="Logo" style="width:20px;" class="rounded-pill">
+            </a>
+        </div>
+    </nav>
+
+    <!-- all leads count with card view -->
+    <div class="container">
+        <div class="row parent_card">
+            <div class="col-12 col-md-3 col-lg-3">
+                <div class="card user_card">
+                    <div class="card-body">
+                        <h5 class="card-title">Builder</h5>
+                        <p class="card-text" id="textNumber">10,502</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <div class="card user_card1">
+                    <div class="card-body">
+                        <h5 class="card-title">Builder</h5>
+                        <p class="card-text" id="textNumber">10,502</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <div class="card user_card">
+                    <div class="card-body">
+                        <h5 class="card-title">Builder</h5>
+                        <p class="card-text" id="textNumber">10,502</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+                <div class="card user_card1">
+                    <div class="card-body">
+                        <h5 class="card-title">Builder</h5>
+                        <p class="card-text" id="textNumber">10,502</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- table view -->
+    <div class="table_header">
+        <div class="row">
+            <div class="col-12 col-md-8 col-lg-8">
+                <div class="card " style="height: 500px; overflow: scroll;">
+                    <div class="card-header">
+                        Client Lead Data
+                    </div>
+                    <table class="card-table table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Sr No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Mobile No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-3 graph_card">
+                <div class="circle-border">
+                    <h5>Total leads</h5>
+                    <div class="circlePercent">
+                        <div class="counter" data-percent="0"></div>
+                        <div class="progress"></div>
+                        <div class="progressEnd"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- handling messages -->
+    <div style="margin-top: 10px;">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error"%}
+        <script>
+            swal({
+                icon: 'warning',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Next",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% else %}
+        <script>
+            swal({
+                icon: '/static/image/login_success.png',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Done",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        function setProgress(elem, percent) {
+            var
+                degrees = percent * 3.6,
+                transform = /MSIE 9/.test(navigator.userAgent) ? 'msTransform' : 'transform';
+            elem.querySelector('.counter').setAttribute('data-percent', Math.round(percent));
+            elem.querySelector('.progressEnd').style[transform] = 'rotate(' + degrees + 'deg)';
+            elem.querySelector('.progress').style[transform] = 'rotate(' + degrees + 'deg)';
+            if (percent >= 50 && !/(^|\s)fiftyPlus(\s|$)/.test(elem.className))
+                elem.className += ' fiftyPlus';
+        }
+
+        (function () {
+            var
+                elem = document.querySelector('.circlePercent'),
+                percent = 0;
+            (function animate() {
+                setProgress(elem, (percent += .25));
+                if (percent < 100)
+                    setTimeout(animate, 15);
+            })();
+        })();
+    </script>
+</body>
+
+</html>

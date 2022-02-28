@@ -1,0 +1,304 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+{% load Filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Notes</title>
+    <link rel="stylesheet" href="/static/css/leads.css">
+</head>
+
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+            padding-bottom: 15px;
+        }
+        .notecard{
+            margin-left: 10px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .card{
+            width: 100%;
+        }
+        .btn{
+            margin-left: 15px;
+        }
+        .addNote{
+            margin-left: 10px;
+        }
+        .form-group{
+            padding: 10px;
+        }
+
+        
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+            margin-bottom: 15px;
+        }
+
+        .navigation_bar {
+            margin-left: 0px;
+            background-color: #04aa6d;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .parenttab {
+            margin-top: 60px;
+            margin-left: 160px;
+            width: 90%;
+        }
+
+        .editLeadCard {
+            width: 70%;
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+            margin-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+            margin-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .form_class {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+        .notecard{display: block;
+        }
+
+    }
+</style>
+
+
+<body>
+    {% block content %}
+
+
+
+    <!-- showing all notes -->
+    <div class="notecard" id="notecard">
+        <button class="btn btn-primary" onclick="openAddNoteForm()">Add Note</button>
+        {% if lead_note %}
+        {% for i in lead_note %}
+        <div class="card">
+            <div class="container">
+                <label for=""><strong>Lead Type:</strong></label>
+                <label for="">{{ i.lead_id.lead_type }}</label><br>
+
+                <label for=""><strong>Lead:</strong></label>
+                <label for="">{{ i.lead_id.leads }}</label><br>
+
+                <label for=""><strong>followp date:</strong></label>
+                <label for="">{{ i.next_followup }}</label><br>
+
+                <label for=""><strong>Appoinment Call:</strong></label>
+                <label for="">{{ i.ctime }}</label><br>
+
+                <label for=""><strong>Mobile Number:</strong></label>
+                <label for="">{{ i.lead_id.contact }}</label><br>
+
+                <label for=""><strong>Email:</strong></label>
+                <label for="">{{ i.lead_id.email }}</label><br>
+
+                <label for=""><strong>Billing Address:</strong></label>
+                <label for="">{{ i.lead_id.billing_address }}</label><br>
+
+                <label for=""><strong>Shipping Address:</strong></label>
+                <label for="">{{ i.lead_id.shipping_address }}</label><br>
+
+                <label for=""><strong>Note Comment:</strong></label>
+                <label for="">{{ i.note_comment }}</label><br>
+
+                <label for=""><strong>Note Generate:</strong></label>
+                <label for="">{{ i.ctime }}</label><br>
+
+                <label for=""><strong>Lead Confirm :</strong></label>
+                {% if i.is_lead_conform == 0 or i.is_lead_conform == null %}
+                <label for="">No</label>
+                {% else %}
+                <label for="">Yes</label>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card">
+            <div class="card-body">
+                <h5>Note Un-Available</h5>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- add lead note  -->
+
+    <div class="addNote" id="add_note" style="display: none;">
+        <img onclick="openLeadNote()"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAOZJREFUSEvt1dENgjAYBOBjA0dwAx1BN9FNdBQnUTfQDXQDRzCXtEnTtOH/j2JjAi/wQPm4aykDOh1DJxcL/LPm/67qFYA1gIdakZKY6DXAexX3whHdhqR3ADsltQfO0WdAP3PCTVG+qCVxc9QCz4KOwTnKuTwAsM7pG8CrNv+1qnNUWT9nACcFvgHYKGIYI8Ecy9QpzoqPjqpZs7vqGDTHuUVyt7LOc7Uw6+eUJm+CW+BS7ZNxK9wc98Al/BK+bffi98Ipzmv+maSFpsAR51lCx7ZMd32eAWpij1G8d4EnV2h9QLeqv/KyMB8qwdA1AAAAAElFTkSuQmCC" />
+        
+        <form action="{% url 'lead_note_class' %}" method="post">
+
+            <div class="form-group">
+
+                <input class="largerCheckbox" type="checkbox" value="1" id="project" name="is_demo">
+                Demo
+                &nbsp
+                <input class="largerCheckbox" type="checkbox" value="1" id="project" name="is_site_visit">
+                Site Visit
+                &nbsp
+                <input class="largerCheckbox" type="checkbox" value="1" id="project" name="is_electric_layout">
+                Electric Layout
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail1">Note : </label>
+                <textarea rows="4" class="form-control" cols="50" name="note_comment"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">Next FollowUp :</label>
+                <input type="date" id="birthday" name="next_followup">
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">TiedUp Date :</label>
+                <input type="date" id="birthday" name="tied_up_date">
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">Proposal :</label>
+                <input class="largerCheckbox" type="checkbox" value="1" id="project" name="is_proposal">
+                Quotation
+            </div>
+
+            <div class="form-group">
+                <label for="birthday">Negotiable Discount :</label>
+                <input type="text" id=" " name="discount" maxlength="3" size="3">
+                %
+            </div>
+
+            <div class="form-check">
+                <label class="check_txt">Lead Confirm : </label>
+                <input class="largerCheckbox" type="checkbox" value="1" id="project" name="is_lead_conform">
+            </div>
+
+            <div class="form-check" style="visibility: hidden;">
+                <label class="check_txt">Lead Id : </label>
+                <input type="text" value="{{ lead_id }}" id="project" name="lead_id">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Note</button>
+
+        </form>
+    </div>
+
+    {% endblock %}
+    <script src="/static/js/saleshome.js"></script>
+</body>
+
+</html>

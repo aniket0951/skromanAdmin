@@ -1,0 +1,389 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Client</title>
+    <link rel="stylesheet" href="/static/css/addNewClient.css">
+    <link href="{% static 'css/addNewClient.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+    <script
+        src="https://unpkg.com/bootstrap-table@1.19.1/dist/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+    <script src="extensions/mobile/bootstrap-table-mobile.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+</head>
+<!-- handle a screen configration -->
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+        }
+
+        .navigation_bar {
+            /* margin-left: 0px;
+        background-color: #04aa6d; */
+            display: none;
+        }
+
+        .mobile-container {
+            display: block;
+        }
+
+        .sidebar {
+            display: none;
+        }
+
+        .form-group {
+            width: 80%;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .form-select {
+            margin-left: 15px;
+            margin-right: 15px;
+            width: 80%;
+        }
+
+        .form_class {
+            width: 100%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        #dropDown1 {
+            width: 80%;
+            margin-left: 10px;
+        }
+
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+        }
+
+        .navigation_bar {
+            margin-left: 0px;
+            background-color: #04aa6d;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+            /* margin-left: 10px; */
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+            /* margin-left: 10px; */
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .form_class {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .card {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+    }
+</style>
+
+<body style="overflow:scroll;">
+
+    {% block content %}
+
+    {% if request == 'edit' %}
+    <!-- edit user information -->
+    <form action="{% url 'edu_client' data.id %}" method="post" class="form_class" style="display: block;">
+
+        <h3 class="form_head">Edit Client Details </h3>
+
+        <!-- client details -->
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" value="{{ data.name }}" id="exampleInputEmail1" name="name" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Email</label>
+            <input type="text" class="form-control" name="email" value="{{ data.email }}" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Mobile Number</label>
+            <input type="number" maxlength="10" class="form-control" value="{{ data.contact}}" name="contact" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Address</label>
+            <input type="text" class="form-control" value="{{ data.address }}" name="address" id="Address">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">City</label>
+            <input type="text" class="form-control" value="{{ data.city }}" name="city" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Pin Code</label>
+            <input type="number" class="form-control" value="{{ data.pin_code }}" name="pin_code" id="clientSiteAddress">
+        </div>
+
+        <div class="mb-3" id="dropDown1">
+            <label for="pwd" class="form-label">Client Type:</label>
+            <select id="list" class="form-select" name="c_type" aria-label="Default select example">
+                <option name="" id="dropOptions" selected>{{ data.c_type }}</option>
+                <option value="Builder">Builder</option>
+                <option value="Architect">Architect</option>
+                <option value="Designer">Designer</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary sub_btn">Submit</button>
+        <h3></h3>
+
+    </form>
+    {% else %}
+    <!-- to get client details -->
+    <form action="{% url 'client' %}" method="post" class="form_class">
+        <h3 class="form_head">Add New Client</h3>
+
+
+        <!-- client details -->
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Email</label>
+            <input type="text" class="form-control" name="email" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Mobile Number</label>
+            <input type="number" maxlength="10" class="form-control" name="contact" id="exampleInputPassword1">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1"> Address</label>
+            <input type="text" class="form-control" name="address" id="Address">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">City</label>
+            <input type="text" class="form-control" name="city" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Pin Code</label>
+            <input type="number" class="form-control" name="pin_code" id="clientSiteAddress">
+        </div>
+
+        <div class="mb-3" id="dropDown1">
+            <label for="pwd" class="form-label">Client Type:</label>
+            <select id="list" class="form-select" name="c_type" aria-label="Default select example">
+                <option name="" id="dropOptions" selected>End User</option>
+                <option value="Builder">Builder</option>
+                <option value="Architect">Architect</option>
+                <option value="Designer">Designer</option>
+            </select>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary sub_btn">Submit</button>
+        <h3></h3>
+
+    </form>
+
+    {% endif %}
+
+    <!-- handling messages -->
+    <div style="margin-top: 10px;">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error"%}
+        <script>
+            swal({
+                icon: 'warning',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Next",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% else %}
+        <script>
+            swal({
+                icon: '/static/image/login_success.png',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Done",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#clientAddress").change(function () {
+                var a = $("#clientAddress").val();
+                $("#clientSiteAddress").val(a);
+            });
+        });
+
+        function openProjectDiv() {
+            // Get the checkbox
+            var checkBox = document.getElementById("project");
+            // Get the output text
+            var text = document.getElementById("project_div");
+            var p_div2 = document.getElementById("project_div2");
+            var p_div3 = document.getElementById("project_div3");
+
+            // If the checkbox is checked, display the output text
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+                p_div2.style.display = "block";
+                p_div3.style.display = "block";
+            } else {
+                text.style.display = "none";
+                p_div2.style.display = "none";
+                p_div3.style.display = "none";
+            }
+        }
+
+        function openReferalDiv() {
+            var checkBox = document.getElementById("referal");
+
+            var text = document.getElementById("dropDown2");
+            var ref_div = document.getElementById("ref_div");
+            var ref_div2 = document.getElementById("ref_div2");
+            var ref_div3 = document.getElementById("ref_div3");
+            var ref_div4 = document.getElementById("ref_div4");
+
+            if (checkBox.checked == true) {
+                text.style.display = "block";
+                ref_div.style.display = "block";
+                ref_div2.style.display = "block";
+                ref_div3.style.display = "block";
+                ref_div4.style.display = "block";
+            } else {
+                text.style.display = "none";
+                ref_div.style.display = "none";
+                ref_div2.style.display = "none";
+                ref_div3.style.display = "none";
+                ref_div4.style.display = "none";
+            }
+        }
+
+
+    </script>
+
+    {% endblock %}
+
+</body>
+
+</html>
