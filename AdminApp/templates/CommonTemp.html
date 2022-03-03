@@ -112,6 +112,7 @@
 
     <!-- sidebar with options -->
     <div class="sidebar">
+        
         {% if department == 'Production' %}
         <a class="active" href="#">Home</a>
         <a href="#">Production User</a>
@@ -119,6 +120,11 @@
         <a class="active" href="{% url 'usermodes' 'openmode' %}">Home</a>
         <a href="{% url 'client_details' %}">Client</a>
         <a href="{% url 'leadhome' %}">Lead</a>
+        {% elif department == 'Installation' %}
+        <a class="active" href="{% url 'usermodes' 'openmode' %}">Home</a>
+
+        <a  href="{% url 'installation' 'adduser' %}">Users</a>
+
         {% elif department == 'ProductionMembers' %}
         <a class="active" href="#">Member</a>
         {% else %}

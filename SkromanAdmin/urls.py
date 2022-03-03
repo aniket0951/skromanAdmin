@@ -24,4 +24,7 @@ urlpatterns = [
 
     # admin app urls
     path('adminapp/', include('AdminApp.adminurl')),
+
+    # installation app urls
+    path('installation/', include('Installation.installationurl')),
 ]

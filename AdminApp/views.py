@@ -5,6 +5,7 @@ from .adminserializer import *
 from django.contrib import messages
 from django.http import *
 from SalesApp.views import *
+from Installation.views import *
 
 # Create your views here.
 def OpenSkroman(request):
@@ -28,7 +29,7 @@ def LoginUser(request):
 
         # check user is register or not
         user = Users.objects.filter(email=email, user_dept=department)
-        if department == 'Production' or department == 'Sales':
+        if department == 'Production' or department == 'Sales' or department == 'Installation':
             return navigateScreen(request, department, email)
 
         if user:
@@ -71,7 +72,8 @@ def navigateScreen(request, department, email):
         return HttpResponse("Production")
     elif department == 'Sales':
         return OpenUserModes(request, 'openmode')
-        return HttpResponse('Sales')        
+    elif department == 'Installation':
+        return OpenInstallation(request,'installation')      
     # elif department == 'Production':
     #     production_user = ProductionUser.objects.filter(emailId=email, department=department)
     #     production_ser = ProductionUserSer(production_user, many=True)

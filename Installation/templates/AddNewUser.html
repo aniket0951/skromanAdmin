@@ -1,0 +1,142 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New User</title>
+    <link rel="stylesheet" href="/static/css/installation.css">
+    <link rel="stylesheet" href="/static/css/bom.css">
+
+
+</head>
+
+<body>
+    {% block content %}
+    <!-- add member button here -->
+    <div class="addclientbtn"  id="addclientbtn">
+        <form  class="addMemberBtn" id="addMemberBtn">
+            <h3></h3>
+        </form>
+        <button style="margin-top: 15px;" type="Submit" onclick="OpenForm()" class="btn btn-primary addMemberBtn">Add User</button>
+    </div>
+
+    <!-- show table view -->
+    <section class="parenttab" id="parentclass">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Leads</strong></a>
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Department</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Work</th>
+                                        <th scope="col">Active</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in users %}
+                                    <tr>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.email }}</td>
+                                        <td>{{ i.user_dept }}</td>
+                                        <td>{{ i.designation }}</td>
+                                        <td>{{ i.work }}</td>
+                                        <td>{{ i.is_active }}</td>
+                                        <td>
+                                            <button
+                                            onclick="editUser('{{ i.name }}', '{{ i.name }}', '{{ i.name }}',
+                                                              '{{ i.name }}', '{{ i.name }}', '{{ i.name }}', '{{ i.id }}')"
+                                            class="btn btn-primary">Edit</button>
+
+
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'lead_notes' i.id %}" class="d-inline">
+                                                <button type="submit" class="btn btn-primary">Notes</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <h1>{{ data }}</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- show form of add new users -->
+    <div id="formdiv" class="container-fluid parentclass">
+        <h4 style="text-align: center;">Add New Lead</h4>
+        <form action="{% url 'installation_user' %}" method="post">
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" class="form-control" name="name" id="name">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" class="form-control" name="password" id="password">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Designation</label>
+                <input type="text" class="form-control" name="designation" id="designation">
+            </div>
+
+            <div class="form-group" style="display: block;">
+                <label for="exampleInputPassword1">Work</label>
+                <input type="text" class="form-control" name="work" id="work">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Department</label>
+                <input type="text" class="form-control" value="Installation" name="user_dept" id="user_dept" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Is Active</label>
+                <input type="text" class="form-control" value="1" name="is_active" id="is_active" readonly>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Lead</button>
+        </form>
+
+    </div>
+    {% endblock %}
+    <script src="/static/js/installation.js"></script>
+</body>
+
+</html>
