@@ -16,12 +16,68 @@
 
 <body>
     {% block content %}
-    <!-- add member button here -->
-    <div class="addclientbtn"  id="addclientbtn">
-        <form  class="addMemberBtn" id="addMemberBtn">
-            <h3></h3>
+
+    {% if edit == 'edit' %}
+
+    <!-- form for update user information -->
+    <div id="editformdiv" class="container-fluid editparentclass">
+        <h4 style="text-align: center;">Update User Information</h4>
+        <img onclick="openUserData()"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAOZJREFUSEvt1dENgjAYBOBjA0dwAx1BN9FNdBQnUTfQDXQDRzCXtEnTtOH/j2JjAi/wQPm4aykDOh1DJxcL/LPm/67qFYA1gIdakZKY6DXAexX3whHdhqR3ADsltQfO0WdAP3PCTVG+qCVxc9QCz4KOwTnKuTwAsM7pG8CrNv+1qnNUWT9nACcFvgHYKGIYI8Ecy9QpzoqPjqpZs7vqGDTHuUVyt7LOc7Uw6+eUJm+CW+BS7ZNxK9wc98Al/BK+bffi98Ipzmv+maSFpsAR51lCx7ZMd32eAWpij1G8d4EnV2h9QLeqv/KyMB8qwdA1AAAAAElFTkSuQmCC" />
+
+        <form action="{% url 'installation_pk' data.id %}" method="post">
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input type="text" class="form-control" value="{{ data.name }}" name="name" id="editname">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Email</label>
+                <input type="email" class="form-control" value="{{ data.email }}" name="email" id="editemail">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="text" class="form-control" value="{{ data.password }}" name="password" id="editpassword">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Designation</label>
+                <input type="text" class="form-control" value="{{ data.designation }}" name="designation"
+                    id="editdesignation">
+            </div>
+
+            <div class="form-group" style="display: block;">
+                <label for="exampleInputPassword1">Work</label>
+                <input type="text" class="form-control" value="{{ data.work }}" name="work" id="weditork">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Department</label>
+                <input type="text" class="form-control" value="{{ data.user_dept }}" name="user_dept"
+                    id="edituser_dept">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Is Active</label>
+                <input type="text" class="form-control" value="{{ data.is_active }}" name="is_active"
+                    id="editis_active">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
         </form>
-        <button style="margin-top: 15px;" type="Submit" onclick="OpenForm()" class="btn btn-primary addMemberBtn">Add User</button>
+
+    </div>
+
+    {% elif edit == 'show' %}
+
+    <!-- add member button here -->
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'installation' 'addNewUser' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">Add
+                User</button>
+        </form>
+
     </div>
 
     <!-- show table view -->
@@ -52,6 +108,7 @@
                                         <th scope="col">Designation</th>
                                         <th scope="col">Work</th>
                                         <th scope="col">Active</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,18 +121,19 @@
                                         <td>{{ i.work }}</td>
                                         <td>{{ i.is_active }}</td>
                                         <td>
+
+                                            <form action="{% url 'installation_pk' i.id %}">
+                                                <button class="btn btn-primary">Edit</button>
+                                            </form>
+                                        </td>
+                                        <!-- <td>
                                             <button
-                                            onclick="editUser('{{ i.name }}', '{{ i.name }}', '{{ i.name }}',
-                                                              '{{ i.name }}', '{{ i.name }}', '{{ i.name }}', '{{ i.id }}')"
+                                            onclick="editUser('{{ i.name }}', '{{ i.email }}', '{{ i.user_dept }}',
+                                                              '{{ i.designation }}', '{{ i.work }}', '{{ i.is_active }}', '{{ i.id }}')"
                                             class="btn btn-primary">Edit</button>
 
 
-                                        </td>
-                                        <td>
-                                            <form action="{% url 'lead_notes' i.id %}" class="d-inline">
-                                                <button type="submit" class="btn btn-primary">Notes</button>
-                                            </form>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -89,11 +147,14 @@
             </div>
         </div>
     </section>
-    
 
+    {% else %}
     <!-- show form of add new users -->
     <div id="formdiv" class="container-fluid parentclass">
         <h4 style="text-align: center;">Add New Lead</h4>
+        <img onclick="openUserData()"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAOZJREFUSEvt1dENgjAYBOBjA0dwAx1BN9FNdBQnUTfQDXQDRzCXtEnTtOH/j2JjAi/wQPm4aykDOh1DJxcL/LPm/67qFYA1gIdakZKY6DXAexX3whHdhqR3ADsltQfO0WdAP3PCTVG+qCVxc9QCz4KOwTnKuTwAsM7pG8CrNv+1qnNUWT9nACcFvgHYKGIYI8Ecy9QpzoqPjqpZs7vqGDTHuUVyt7LOc7Uw6+eUJm+CW+BS7ZNxK9wc98Al/BK+bffi98Ipzmv+maSFpsAR51lCx7ZMd32eAWpij1G8d4EnV2h9QLeqv/KyMB8qwdA1AAAAAElFTkSuQmCC" />
+
         <form action="{% url 'installation_user' %}" method="post">
 
             <div class="form-group">
@@ -131,10 +192,13 @@
                 <input type="text" class="form-control" value="1" name="is_active" id="is_active" readonly>
             </div>
 
-            <button type="submit" class="btn btn-primary">Add Lead</button>
+            <button type="submit" class="btn btn-primary">Add User</button>
         </form>
 
     </div>
+
+    {% endif %}
+
     {% endblock %}
     <script src="/static/js/installation.js"></script>
 </body>

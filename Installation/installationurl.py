@@ -8,6 +8,9 @@ urlpatterns = [
     # add new user
     path('InstallationUser/', InstallationUser.as_view(), name='installation_user'),
 
+    # to pk based operation
+    path('InstallationPKClass/<int:pk>/', InstallationPKClass.as_view(), name='installation_pk'),
+
     # get all user list
     path('UserListView/', UserListView.as_view(), name='user_list'),
 ]
