@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 
 # Create your models here.
@@ -14,4 +15,16 @@ class SkromanClients(models.Model):
     uptime = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'clients'  
+        db_table = 'clients' 
+
+class ComplaintsModel(models.Model):
+    complaint_des = models.TextField()
+    appointment_date = models.DateField()
+    timeslot = models.CharField(max_length=120, null=True, blank=True)
+    device = models.CharField(max_length=120, null=True, blank=True)
+    lead_id = models.ForeignKey('SalesApp.LeadModel', on_delete=models.CASCADE, related_name="lead")
+    ctime = models.DateTimeField(auto_now_add=True)
+    uptime = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'complaints'
