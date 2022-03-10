@@ -27,5 +27,11 @@ urlpatterns = [
     path('leadnote/<int:pk>/', LeadNotes.as_view(), name='lead_notes'),
 
     # add new lead note
-    path('lead_note_class/', LeadNoteClass.as_view(), name='lead_note_class')
+    path('lead_note_class/', LeadNoteClass.as_view(), name='lead_note_class'),
+
+
+    path('SkromanVideo/', SkromanVideo, name='SkromanVideo'),
+
+    path('DeviceImages/', DeviceImages, name='DeviceImages')
+
 ]

@@ -171,3 +171,10 @@ class LeadNotes(ListView):
         context['department'] = 'Sales'
         context['lead_id'] = lead_id
         return context
+
+
+def SkromanVideo(request):
+    return render(request,'SkromanVideo.html')
+
+def DeviceImages(request):
+    return render(request,'Device-Images.html')
