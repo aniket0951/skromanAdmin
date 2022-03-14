@@ -43,6 +43,7 @@
                                             <th scope="col">Appoinment Date</th>
                                             <th scope="col">Time Slot</th>
                                             <th scope="col">Device</th>
+                                            <th scope="col">Service Engineer</th>
                                             <th scope="col">Action</th>
                                             
                                         </tr>
@@ -58,7 +59,14 @@
                                             <td>{{ i.appointment_date }}</td>
                                             <td>{{ i.timeslot }}</td>
                                             <td>{{ i.device }}</td>
-                                            
+                                            <td>
+                                                <select name="refrence type" id="cars" class="form-select" name="pin_code" id="pin_code" required>
+                                                  <option value="Akshay">Akshay</option>
+                                                  <option value="Mayur">Mayur</option>
+                                                  <option value="Sachin">Sachin</option>
+                                                  <option value="Pralhad">Pralhad</option>
+                                                </select>
+                                            </td>
                                             <td>
                                                 <form action="{% url 'open_complaint' i.id %}" class="d-inline">
                                                     <button type="submit" class="btn btn-primary">Assign</button>
