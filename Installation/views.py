@@ -11,6 +11,7 @@ from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
 
+
 # Create your views here.
 def OpenInstallation(request, tag):
     # context = {'department': 'Installation'}
@@ -22,27 +23,30 @@ def OpenInstallation(request, tag):
         context = {}
         context['department'] = 'Installation'
         context['edit'] = 'addForm'
-        return render(request, 'AddNewUser.html', context)    
+        return render(request, 'AddNewUser.html', context)
     else:
         return HttpResponse("no matched tag")
 
+
 def OpenAddComplaint(request, lead_id):
     context = {
-        'lead_id' :lead_id,
+        'lead_id': lead_id,
         'department': 'Installation'
     }
     return render(request, "AddComplaints.html", context)
+
 
 # add new user installation
 class InstallationUser(CreateModelMixin, GenericAPIView):
     queryset = Users.objects.all()
     serializer_class = UserSerializer
 
-    def post(self, request , *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         add = self.create(request, *args, **kwargs)
         if add:
             messages.success(request, "New User Addedd Successfully.")
             return redirect('user_list')
+
 
 class InstallationPKClass(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
     queryset = Users.objects.all()
@@ -62,6 +66,7 @@ class InstallationPKClass(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
         }
         return render(self.request, 'AddNewUser.html', context)
 
+
 class UserListView(ListView):
     queryset = Users.objects.all().order_by('-id')
     template_name = 'AddNewUser.html'
@@ -72,6 +77,7 @@ class UserListView(ListView):
         context['department'] = 'Installation'
         context['edit'] = 'show'
         return context
+
 
 # get all leads details
 class LeadListView(ListView):
@@ -85,6 +91,7 @@ class LeadListView(ListView):
 
         return context
 
+
 # add or get complaints
 class ComplaintClass(CreateModelMixin, GenericAPIView):
     queryset = ComplaintsModel.objects.all()
@@ -94,7 +101,8 @@ class ComplaintClass(CreateModelMixin, GenericAPIView):
         complaint = self.create(request, *args, **kwargs)
         if complaint:
             messages.success(self.request, "New Complaint Added Successfully")
-            return redirect('lead_list') 
+            return redirect('lead_list')
+
 
 class ComplaintListView(ListView):
     queryset = ComplaintsModel.objects.all().order_by('-id')
@@ -106,6 +114,7 @@ class ComplaintListView(ListView):
         context['department'] = 'Installation'
 
         return context
+
 
 def test(request):
     comdata = ComplaintsModel.objects.all()

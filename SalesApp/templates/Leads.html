@@ -296,7 +296,7 @@
                                                 onclick="leadEdit('{{ i.name }}', '{{ i.email }}',
                                             '{{ i.contact }}', '{{ i.city }}',
                                             '{{ i.pin_code }}', '{{ i.ctime }}', '{{ i.lead_type }}',
-                                            '{{ i.leads}}', '{{i.billing_address}}', '{{i.shipping_address}}' , '{{ i.id }}')"
+                                            '{{ i.leads}}', '{{i.billing_address}}', '{{i.shipping_address}}' , '{{ i.id }}', '{{ i.ref_type }}', '{{ i.ref_name }}')"
                                                 class="btn btn-primary">Edit</button>
 
 
@@ -381,8 +381,7 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Refrence Type</label>
-                <select name="refrence type" id="cars" class="form-select" name="pin_code" id="pin_code" required>
-                  <option value="Builder">Builder</option>
+                <select id="ref_type" class="form-select" name="ref_type" aria-label="Default select example">                  <option value="Builder">Builder</option>
                   <option value="Architect">Architect</option>
                   <option value="Interior Design">Interior Design</option>
                   <option value="System Integrator">System Integrator</option>
@@ -391,7 +390,7 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Person name</label>
-                <input type="text" class="form-control" name="pin_code" id="pin_code" required>
+                <input type="text" class="form-control" name="ref_name" id="ref_name">
             </div>
             <button type="submit" class="btn btn-primary"> Update </button>
         </form>
