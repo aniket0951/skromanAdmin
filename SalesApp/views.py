@@ -7,6 +7,7 @@ from django.http import *
 from django.views.generic.list import ListView
 from Installation.models import *
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
 
 
 # Create your views here.
@@ -28,6 +29,11 @@ def OpenUserModes(request, tag):
     elif tag == 'openleadpresentation':
         context.update({'department': 'Sales'})
         context['skip'] = 'skip'
+        return render(request, 'AddLead.html', context)
+    elif tag == 'openpresentation':
+        context.update({'department': 'Sales'})
+        context['skip'] = 'skip'
+        context['presentation'] = 'presentation'
         return render(request, 'AddLead.html', context)
 
     # create a new lead or add an new lead
@@ -70,12 +76,14 @@ class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
             city = self.request.POST.get('city')
             pin_code = self.request.POST.get('pin_code')
             lead_id = self.request.POST.get('lead_id')
+            ref_type = self.request.POST.get('ref_type')
+            ref_name = self.request.POST.get('ref_name')
 
             data = LeadModel.objects.filter(id=lead_id).update(lead_type=lead_type,
                                                                leads=leads, name=name, email=email,
                                                                contact=contact, billing_address=billing_address,
                                                                shipping_address=shipping_address, city=city,
-                                                               pin_code=pin_code)
+                                                               pin_code=pin_code, ref_type=ref_type, ref_name=ref_name)
             if data:
                 messages.success(self.request, 'Lead update successfully')
                 return redirect('leadhome')
@@ -123,7 +131,7 @@ class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     def post(self, request, *args, **kwargs):
         update = self.update(request, *args, **kwargs)
         if update:
-            messages.success(self.request,  'Client information updated successfully')
+            messages.success(self.request, 'Client information updated successfully')
             return redirect('client_details')
 
 
@@ -174,7 +182,8 @@ class LeadNotes(ListView):
 
 
 def SkromanVideo(request):
-    return render(request,'SkromanVideo.html')
+    return render(request, 'SkromanVideo.html')
+
 
 def DeviceImages(request):
-    return render(request,'Device-Images.html')
+    return render(request, 'Device-Images.html')

@@ -23,6 +23,8 @@ class LeadModel(models.Model):
     lead_status = models.CharField(max_length=40, null=True, blank=True)
     client = models.ForeignKey(SkromanClients, on_delete=models.CASCADE, related_name="client")
     site_name = models.CharField(max_length=255, null=True, blank=True)
+    ref_type = models.CharField(max_length=255, null=True, blank=True)
+    ref_name = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         db_table = 'leads'
