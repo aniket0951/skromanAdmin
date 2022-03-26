@@ -1,15 +1,43 @@
 from multiprocessing import context
+
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
 from rest_framework.generics import *
 from rest_framework.mixins import *
 from django.contrib import messages
-from AdminApp.models import *
+# from AdminApp.models import *
 from AdminApp.adminserializer import *
 from django.views.generic.list import ListView
 from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
+
+from django.contrib import auth
+from django.contrib.auth import forms
+from django.core import paginator
+from django.db import connection
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.core.paginator import EmptyPage, Page, Paginator
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import AbstractBaseUser, UserManager
+from django.contrib.auth.hashers import make_password, check_password
+from passlib.hash import pbkdf2_sha256
+
+from django.contrib import messages
+
+from django.core import serializers
+from django.http import JsonResponse
+from .models import *
+from django.utils.datastructures import MultiValueDictKeyError
+import requests
+
 
 
 # Create your views here.
@@ -44,7 +72,7 @@ class InstallationUser(CreateModelMixin, GenericAPIView):
     def post(self, request, *args, **kwargs):
         add = self.create(request, *args, **kwargs)
         if add:
-            messages.success(request, "New User Addedd Successfully.")
+            messages.success(request, "New User Added Successfully.")
             return redirect('user_list')
 
 
@@ -88,8 +116,8 @@ class LeadListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['department'] = 'Installation'
-
         return context
+
 
 
 # add or get complaints

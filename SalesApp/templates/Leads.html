@@ -255,7 +255,7 @@
                     <a href=""><strong>Leads</strong></a>
                     <div class="search-container">
                         <form action="/action_page.php">
-                            <input type="text" placeholder="Search.." name="search">
+                            <input name = "q" type="search" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -274,7 +274,7 @@
                                         <th scope="col">Mobile Number</th>
                                         <th scope="col">City</th>
                                         <th scope="col">Pin</th>
-                                        <th scope="col">Up Comming</th>
+                                        <th scope="col">Up Coming</th>
                                         <th scope="col">Lead Status</th>
                                         <th scope="col">Edit</th>
                                         <th scope="col">Followp</th>
@@ -396,7 +396,23 @@
         </form>
     </div>
 
-      
+
+
+    <div class="pagination_div">
+  <ul class="pagination justify-content-end">
+    <li class="page-item">
+      {% if lead_list.has_previous%}
+      <a href="{% url 'lead_list'%}?page={{lead_list.previous_page_number}}" class="page-link">previous</a>
+      {% endif %}
+    </li>
+    <li class="page-item">
+      {% if lead_list.has_next%}
+      <a href="{% url 'lead_list'%}?page={{lead_list.next_page_number}}" class="page-link">next</a>
+      {% endif %}
+    </li>
+  </ul>
+</div>
+
 
     {% endblock %}
     <script src="/static/js/saleshome.js"></script>
