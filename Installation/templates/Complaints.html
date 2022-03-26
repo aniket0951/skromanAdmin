@@ -2,6 +2,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,85 +10,200 @@
     <title>Complaints</title>
     <link rel="stylesheet" href="/static/css/bom.css">
 </head>
+
 <body>
-    
-    {% block content %} 
 
-        <!-- show table view -->
-        <section class="parenttab" id="bomVerificationSection">
+    {% block content %}
 
-            <div class="row child_tab">
-                <div class="col-lg-12 col-md-12">
-                    <div class="topnav2">
-                        <a href=""><strong>Complaints</strong></a>
-                        <div class="search-container">
-                            <form action="/action_page.php">
-                                <input type="text" placeholder="Search.." name="search">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'assign_complete' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">
+                Work-Assign</button>
+        </form>
+
+
+    </div>
+    <!-- show assign complaints view -->
+    {% if assign == 'assign-show' %}
+    <section class="parenttab" id="bomVerificationSection">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Assign Complaints </strong></a>
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
                     </div>
-    
-                    <div class="tab-content" style="margin-top: -10px;">
-                        <!-- Sales Department -->
-                        <div class="table_parent_div  tab-pane active" id="new">
-                            <div class="basic_info_card table_card" id="menu3">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Client Name</th>
-                                            <th scope="col">Site Name</th>
-                                            <th scope="col">Mobile Number</th>
-                                            <th scope="col">City</th>
-                                            <th scope="col">Complaint</th>
-                                            <th scope="col">Appoinment Date</th>
-                                            <th scope="col">Time Slot</th>
-                                            <th scope="col">Device</th>
-                                            <th scope="col">Service Engineer</th>
-                                            <th scope="col">Action</th>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Client Name</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Complaint</th>
+                                        <th scope="col">Appoinment Date</th>
+                                        <th scope="col">Time Slot</th>
+                                        <th scope="col">Device</th>
+                                        <th scope="col">Service Engineer</th>
+                                        <th scope="col">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in data %}
+                                    <tr>
+                                        <td>Kolte Patil</td>
+                                        <td>{{ i.complaint_id.complaint_des }}</td>
+                                        <td>{{ i.lead_id.contact }}</td>
+                                        <td>{{ i.lead_id.city }}</td>
+                                        <td>{{ i.complaint_des }}</td>
+                                        <td>{{ i.appointment_date }}</td>
+                                        <td>{{ i.timeslot }}</td>
+                                        <td>{{ i.device }}</td>
+                                        <td>
                                             
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for i in leads %}
-                                        <tr>
-                                            <td>Kolte Patil</td>
-                                            <td>{{ i.lead_id.name }}</td>
-                                            <td>{{ i.lead_id.contact }}</td>
-                                            <td>{{ i.lead_id.city }}</td>
-                                            <td>{{ i.complaint_des }}</td>
-                                            <td>{{ i.appointment_date }}</td>
-                                            <td>{{ i.timeslot }}</td>
-                                            <td>{{ i.device }}</td>
-                                            <td>
-                                                <select name="refrence type" id="cars" class="form-select" name="pin_code" id="pin_code" required>
-                                                  <option value="Akshay">Akshay</option>
-                                                  <option value="Mayur">Mayur</option>
-                                                  <option value="Sachin">Sachin</option>
-                                                  <option value="Pralhad">Pralhad</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <form action="{% url 'open_complaint' i.id %}" class="d-inline">
-                                                    <button type="submit" class="btn btn-primary">Assign</button>
-                                                </form>
-                                            </td>
-                                           
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-    
-                                <h1>{{ data }}</h1>
-    
-                            </div>
+                                            <select id="users" name="user_id" onchange="SelectUser()"
+                                                >
+                                                {% for j in users %}
+                                                <option value="{{ j.id }}">{{ j.name }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
+                                                <input type="text" name="user_id" value="" id="user_id1"
+                                                    style="display: none;">
+                                                <input type="text" name="complaint_id" value="{{ i.id }}"
+                                                    style="display: none;">
+                                                <button type="submit" class="btn btn-primary">Assign</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            
+
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    {% else %}
+    <section class="parenttab" id="bomVerificationSection">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Complaints</strong></a>
+                    <div class="search-container">
+                        <form action="/action_page.php">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Client Name</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Complaint</th>
+                                        <th scope="col">Appoinment Date</th>
+                                        <th scope="col">Time Slot</th>
+                                        <th scope="col">Device</th>
+                                        <th scope="col">Service Engineer</th>
+                                        <th scope="col">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in complaints %}
+                                    <tr>
+                                        <td>Kolte Patil</td>
+                                        <td>{{ i.lead_id.name }}</td>
+                                        <td>{{ i.lead_id.contact }}</td>
+                                        <td>{{ i.lead_id.city }}</td>
+                                        <td>{{ i.complaint_des }}</td>
+                                        <td>{{ i.appointment_date }}</td>
+                                        <td>{{ i.timeslot }}</td>
+                                        <td>{{ i.device }}</td>
+                                        <td>
+                                            
+                                            <select id="users" name="user_id" onchange="SelectUser()"
+                                                >
+                                                {% for j in users %}
+                                                <option value="{{ j.id }}">{{ j.name }}</option>
+                                                {% endfor %}
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
+                                                <input type="text" name="user_id" value="" id="user_id1"
+                                                    style="display: none;">
+                                                <input type="text" name="complaint_id" value="{{ i.id }}"
+                                                    style="display: none;">
+                                                <button type="submit" class="btn btn-primary">Assign</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
 
     {% endblock %}
+    <script>
+        function SelectUser() {
+            var user = document.getElementById("users").value;
+            // document.getElementById("user_id").value = user
+            document.getElementById("user_id1").value = user
+
+
+        }
+        function test(a) {
+            var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
+            // alert(x);
+            document.getElementById("user_id1").value = x
+        }
+
+
+
+    </script>
+    <script src="/static/js/complaint.js"></script>
 
 </body>
+
 </html>

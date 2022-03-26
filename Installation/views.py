@@ -10,6 +10,8 @@ from django.views.generic.list import ListView
 from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
+from django.db.models import Q
+
 
 
 # Create your views here.
@@ -105,20 +107,49 @@ class ComplaintClass(CreateModelMixin, GenericAPIView):
 
 
 class ComplaintListView(ListView):
-    queryset = ComplaintsModel.objects.all().order_by('-id')
+    queryset = ComplaintsModel.objects.filter(~Q(complaint_status="Assign")).all().order_by('-id')
     template_name = 'Complaints.html'
-    context_object_name = 'leads'
+    context_object_name = 'complaints'
 
     def get_context_data(self, **kwargs):
         context = super(ComplaintListView, self).get_context_data(**kwargs)
+        data = ComplaintSerializer(self.queryset, many=True)
+        user = Users.objects.filter(user_dept="Installation").all()
+        context['users'] = user
         context['department'] = 'Installation'
-
+        
         return context
 
 
-def test(request):
-    comdata = ComplaintsModel.objects.all()
-    ser = ComplaintSerializer(comdata, many=True)
-    for i in ser.data:
-        print(i['complaint_des'], i['lead_id']['name'])
-    return HttpResponse(ser.data)
+# assign the complaint
+class ComplaintAssignClass(ListModelMixin,CreateModelMixin, GenericAPIView):
+    queryset = ComplaintAssignModel.objects.all()
+    serializer_class = ComplaintAssignSerializer
+
+    def post(self, request, *args, **kwargs):
+        insert = self.create(request, *args, **kwargs)
+        if insert:
+            complaint_id = self.request.POST.get('complaint_id')
+            complaint_update = ComplaintsModel.objects.filter(id=complaint_id).update(complaint_status="Assign")
+
+        messages.success(request, "Complaint assigned successfully")    
+        return redirect('complaints')
+     
+
+# show all assign complaints 
+class AssignComplaintListView(ListModelMixin, GenericAPIView):
+    queryset = ComplaintAssignModel.objects.all()
+    serializer_class = ComplaintAssignSerializer
+    
+
+    def get(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = ComplaintAssignSerializer(queryset, many=True)
+        for i in serializer.data:
+            print(i)
+        context = {
+            "department" : "Installation",
+            "data": serializer.data,
+            "assign": "assign-show" 
+        }
+        return render(self.request, "Complaints.html", context)

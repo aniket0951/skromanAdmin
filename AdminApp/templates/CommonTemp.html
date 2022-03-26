@@ -123,6 +123,8 @@
         {% elif department == 'Installation' %}
         <a class="active" href="{% url 'usermodes' 'openmode' %}">Home</a>
 
+        <a href="{% url 'lead_list' %}">Leads</a>
+
         <a  href="{% url 'installation' 'adduser' %}" style="text-decoration: none">Users</a>
         <a href="{% url 'complaints' %}" style="text-decoration: none"> Complaints </a>
 
