@@ -11,6 +11,7 @@ from django.http import HttpResponse, JsonResponse
 
 
 # Create your views here.
+# display a page using tags
 def OpenUserModes(request, tag):
     context = {
         'department': ""
@@ -39,6 +40,7 @@ def OpenUserModes(request, tag):
     # create a new lead or add an new lead
 
 
+# crud opertaion about lead like add, delete,get etc
 class LeadClass(CreateModelMixin, RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = LeadModel.objects.all()
     serializer_class = LeadSerializer
@@ -59,6 +61,7 @@ class LeadClass(CreateModelMixin, RetrieveModelMixin, ListModelMixin, UpdateMode
         return self.update(request, *args, **kwargs)
 
 
+# to update a lead details pk opertaions
 class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = LeadModel.objects.all()
     serializer_class = LeadSerializer
@@ -92,6 +95,7 @@ class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
         return self.retrieve(request, *args, **kwargs)
 
 
+# to show hole leads details
 class LeadListView(ListView):
     queryset = LeadModel.objects.all().order_by('-id')
     template_name = 'Leads.html'
@@ -104,6 +108,7 @@ class LeadListView(ListView):
         return context
 
 
+#  to add a new client
 class ClientClass(CreateModelMixin, ListModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = SkromanClients.objects.all()
     serializer_class = ClientSerializer
@@ -115,6 +120,7 @@ class ClientClass(CreateModelMixin, ListModelMixin, UpdateModelMixin, GenericAPI
             return redirect('client_details')
 
 
+#  to update a client information
 class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = SkromanClients.objects.all()
     serializer_class = ClientSerializer
@@ -134,6 +140,7 @@ class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
             return redirect('client_details')
 
 
+#  display all client details
 class ClientListView(ListView):
     queryset = SkromanClients.objects.all().order_by('-id')
     template_name = 'SalesHome.html'
@@ -146,6 +153,7 @@ class ClientListView(ListView):
         return context
 
 
+# crud operation for lead notes
 class LeadNoteClass(ListModelMixin, RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = LeadNotes.objects.all()
     serializer_class = LeadNoteSerializer
@@ -165,6 +173,7 @@ class LeadNoteClass(ListModelMixin, RetrieveModelMixin, CreateModelMixin, Generi
             return HttpResponse('Failed to add note, try agian')
 
 
+# display all lead notes details
 class LeadNotes(ListView):
     queryset = LeadNotes.objects.all()
     template_name = 'LeadNotes.html'
@@ -180,6 +189,7 @@ class LeadNotes(ListView):
         return context
 
 
+#  redirect to skroman viewVideo
 def SkromanVideo(request):
     return render(request, 'SkromanVideo.html')
 

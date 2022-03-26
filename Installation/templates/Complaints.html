@@ -60,17 +60,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for i in data %}
+                                    {% for i in assign_complete %}
                                     <tr>
                                         <td>Kolte Patil</td>
+                                        <td>{{ i.complaint_id.lead_id.name }}</td>
+                                        <td>{{ i.complaint_id.lead_id.contact }}</td>
+                                        <td>{{ i.complaint_id.lead_id.city }}</td>
                                         <td>{{ i.complaint_id.complaint_des }}</td>
-                                        <td>{{ i.lead_id.contact }}</td>
-                                        <td>{{ i.lead_id.city }}</td>
-                                        <td>{{ i.complaint_des }}</td>
-                                        <td>{{ i.appointment_date }}</td>
-                                        <td>{{ i.timeslot }}</td>
-                                        <td>{{ i.device }}</td>
-                                        <td>
+                                        <td>{{ i.complaint_id.appointment_date }}</td>
+                                        <td>{{ i.complaint_id.timeslot }}</td>
+                                        <td>{{ i.complaint_id.device }}</td>
+                                        <td>{{ i.user_id.name }}</td>
+                                        <!-- <td>
                                             
                                             <select id="users" name="user_id" onchange="SelectUser()"
                                                 >
@@ -79,7 +80,7 @@
                                                 {% endfor %}
                                             </select>
 
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
                                                 <input type="text" name="user_id" value="" id="user_id1"
