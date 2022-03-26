@@ -35,7 +35,7 @@ class ComplaintsModel(models.Model):
 
 
 # complaint assign
-class ComplaintAssign(models.Model):
+class ComplaintAssignModel(models.Model):
     complaint_id = models.ForeignKey(ComplaintsModel, on_delete=models.CASCADE, related_name="complaint")
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="assignee")
     ctime = models.DateTimeField(auto_now_add=True)

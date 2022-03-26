@@ -120,7 +120,6 @@ class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     serializer_class = ClientSerializer
 
     def get(self, request, *args, **kwargs):
-        print('get fun called')
         context = {
             'data': self.get_object(),
             'request': 'edit',
