@@ -11,6 +11,7 @@ from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
+import datetime
 
 
 # Create your views here.
@@ -123,9 +124,30 @@ class ComplaintListView(ListView):
 
         return context
 
+# get and update a complaint details
+class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
+    queryset = ComplaintsModel.objects.all()
+    serializer_class = ComplaintSerializer
+
+    def get(self, request, *args, **kwargs):
+        date = (self.get_object().appointment_date)
+
+        context = {
+            'department' :'Installation',
+            "assign" :"complaint_update",
+            "data" :self.get_object(), 
+            "appointment_date": date.strftime(str(date))
+        } 
+        return render(request, "AddComplaints.html", context)    
+
+    def post(self, request, *args, **kwargs):
+        update = self.update(request, *args, **kwargs)
+        if update:
+            messages.success(request, "Complaint details updated successfully")
+            return redirect('complaints')    
 
 # assign the complaint
-class ComplaintAssignClass(ListModelMixin, CreateModelMixin, GenericAPIView):
+class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
 
@@ -139,24 +161,9 @@ class ComplaintAssignClass(ListModelMixin, CreateModelMixin, GenericAPIView):
         return redirect('complaints')
 
 
-# show all assign complaints 
-# class AssignComplaintListView(ListModelMixin, GenericAPIView):
-#     queryset = ComplaintAssignModel.objects.all()
-#     serializer_class = ComplaintAssignSerializer
 
-#     def get(self, request, *args, **kwargs):
-#         queryset = self.get_queryset()
-#         serializer = ComplaintAssignSerializer(queryset, many=True)
-#         for i in serializer.data:
-#             for j in i:
-#                 print(j)
-           
-#         context = {
-#             "department": "Installation",
-#             "data": serializer.data,
-#             "assign": "assign-show"
-#         }
-#         return render(self.request, "Complaints.html", context)
+
+# display all complaints with assigned details
 class AssignComplaintListView(ListView):
     queryset = ComplaintAssignModel.objects.all()
     template_name = 'Complaints.html'
@@ -171,3 +178,24 @@ class AssignComplaintListView(ListView):
         context["assign"] = "assign-show"
 
         return context
+
+# update a complete assign engineer installation
+class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin,GenericAPIView):
+    queryset = ComplaintAssignModel.objects.all()
+    serializer_class = ComplaintAssignSerializer
+
+    def post(self, request, *args, **kwargs):
+        update = self.update(request, *args, **kwargs)
+        if update:
+            messages.success(request, "Assign Engineer has been updated successfully")
+            return redirect('assign_complete')
+
+    def get(self, request, *args, **kwargs):
+        user = Users.objects.filter(user_dept="Installation").all()
+        context = {
+            'users': user,
+            'department' :'Installation',
+            "assign" :"update",
+            "data" :self.get_object()
+        }
+        return render(request, "Complaints.html", context)  

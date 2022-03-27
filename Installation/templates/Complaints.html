@@ -9,22 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaints</title>
     <link rel="stylesheet" href="/static/css/bom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 
 <body>
 
     {% block content %}
 
-    <div class="addclientbtn" id="addclientbtn">
+    <!-- <div class="addclientbtn" id="addclientbtn">
         <form action="{% url 'assign_complete' %}" class="addMemberBtn" id="addMemberBtn">
             <button type="Submit" class="btn btn-primary addMemberBtn">
                 Work-Assign</button>
         </form>
 
-
-    </div>
+    </div> -->
     <!-- show assign complaints view -->
     {% if assign == 'assign-show' %}
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'complaints' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">
+                Complaints</button>
+
+        </form>
+
+    </div>
     <section class="parenttab" id="bomVerificationSection">
 
         <div class="row child_tab">
@@ -54,7 +63,7 @@
                                         <th scope="col">Appoinment Date</th>
                                         <th scope="col">Time Slot</th>
                                         <th scope="col">Device</th>
-                                        <th scope="col">Service Engineer</th>
+                                        <th scope="col">Assigned Engineer</th>
                                         <th scope="col">Action</th>
 
                                     </tr>
@@ -71,23 +80,9 @@
                                         <td>{{ i.complaint_id.timeslot }}</td>
                                         <td>{{ i.complaint_id.device }}</td>
                                         <td>{{ i.user_id.name }}</td>
-                                        <!-- <td>
-                                            
-                                            <select id="users" name="user_id" onchange="SelectUser()"
-                                                >
-                                                {% for j in users %}
-                                                <option value="{{ j.id }}">{{ j.name }}</option>
-                                                {% endfor %}
-                                            </select>
-
-                                        </td> -->
                                         <td>
-                                            <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
-                                                <input type="text" name="user_id" value="" id="user_id1"
-                                                    style="display: none;">
-                                                <input type="text" name="complaint_id" value="{{ i.id }}"
-                                                    style="display: none;">
-                                                <button type="submit" class="btn btn-primary">Assign</button>
+                                            <form action="{% url 'update_assignee' i.id %}">
+                                                <button class="btn btn-primary btn-sm">Change Engineer</button>
                                             </form>
                                         </td>
 
@@ -96,7 +91,7 @@
                                 </tbody>
                             </table>
 
-                            
+
 
                         </div>
                     </div>
@@ -104,7 +99,89 @@
             </div>
         </div>
     </section>
+    {% elif assign == 'update' %}
+    <div class="center hideform" id="dropdown-popup">
+        <button onclick="history.back()" id="close" style="float: right;">X</button>
+        <form action="{% url 'update_assignee' data.id %}" method="post">
+            <h4>Change Service Engineer</h4>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Complaint ID:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id_id }}" name="complaint_id"
+                    id="complaint_id" readonly>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Client Name:</label>
+                <input type="text" class="form-control" value="Kolte Patil" name="appointment_date"
+                    id="clientSiteAddress">
+            </div>
+            <div class="form-group">
+                <label for="lname">Site Name:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.lead_id.name }}"
+                    name="appointment_date" id="site_name">
+            </div>
+
+            <div class="form-group">
+                <label for="fname">Mobile Number:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.lead_id.contact}}"
+                    name="appointment_date" id="contact">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">City:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.lead_id.city}}"
+                    name="appointment_date" id="city">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Complaint:</label>
+                <input type="text" value="{{ data.complaint_id.complaint_des }}" class="form-control"
+                    name="appointment_date" id="complaint">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Appoinment Date:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.appointment_date }}"
+                    name="appointment_date" id="appointment_date">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Time Slot:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.timeslot}}" name="appointment_date"
+                    id="timeslot">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Device:</label>
+                <input type="text" class="form-control" value="{{ data.complaint_id.device}}" name="appointment_date"
+                    id="device">
+            </div>
+
+            <div class="form-group">
+                <label for="lname">Assigned Engineer:</label>
+                <input type="text" class="form-control" value="{{ data.user_id.name }}" name="appointment_date"
+                    id="assign_eng">
+            </div>
+
+            <div class="mb-3" id="dropDown1">
+                <label for="pwd" class="form-label">Change Engineer:</label>
+                <select id="list" class="form-select" name="user_id" aria-label="Default select example">
+                    {% for j in users %}
+                    <option value="{{ j.id }}">{{ j.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
     {% else %}
+    <div class="addclientbtn" id="addclientbtn">
+        <form action="{% url 'assign_complete' %}" class="addMemberBtn" id="addMemberBtn">
+            <button type="Submit" class="btn btn-primary addMemberBtn">
+                Work-Assign</button>
+        </form>
+
+    </div>
     <section class="parenttab" id="bomVerificationSection">
 
         <div class="row child_tab">
@@ -151,9 +228,8 @@
                                         <td>{{ i.timeslot }}</td>
                                         <td>{{ i.device }}</td>
                                         <td>
-                                            
-                                            <select id="users" name="user_id" onchange="SelectUser()"
-                                                >
+
+                                            <select id="users" name="user_id" onchange="SelectUser()">
                                                 {% for j in users %}
                                                 <option value="{{ j.id }}">{{ j.name }}</option>
                                                 {% endfor %}
@@ -161,6 +237,9 @@
 
                                         </td>
                                         <td>
+                                            <form action="{% url 'update_complaint_details' i.id %}" class="d-inline">
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </form>
                                             <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
                                                 <input type="text" name="user_id" value="" id="user_id1"
                                                     style="display: none;">
@@ -175,7 +254,7 @@
                                 </tbody>
                             </table>
 
-                            
+
 
                         </div>
                     </div>
@@ -189,18 +268,22 @@
     <script>
         function SelectUser() {
             var user = document.getElementById("users").value;
-            // document.getElementById("user_id").value = user
             document.getElementById("user_id1").value = user
+            // alert(x)
 
 
         }
-        function test(a) {
-            var x = (a.value || a.options[a.selectedIndex].value);  //crossbrowser solution =)
-            // alert(x);
-            document.getElementById("user_id1").value = x
-        }
+        $('#show').on('click', function () {
+            $('.center').show();
+            $('.parenttab').hide();
+            $(this).hide();
+        })
 
-
+        $('#close').on('click', function () {
+            $('.center').hide();
+            $('.parenttab').show();
+            $('#show').show();
+        })
 
     </script>
     <script src="/static/js/complaint.js"></script>

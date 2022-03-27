@@ -24,11 +24,17 @@ urlpatterns = [
 
     path('ComplaintListView/', ComplaintListView.as_view(), name='complaints'),
 
+    # get specific complaint and update complaint details
+    path('UpdateComplaintDetails/<int:pk>/', UpdateComplaintDetails.as_view(), name='update_complaint_details'),
+
     # complaint assign class
     path('ComplaintAssignClass/', ComplaintAssignClass.as_view(), name='complaint_assign'),
 
     # show assign complete list
     path('AssignComplaintListView/', AssignComplaintListView.as_view(), name='assign_complete'),
+
+    # update a assigned engineer complaints
+    path('UpdateAssignComplaint/<int:pk>/', UpdateAssignComplaint.as_view(), name='update_assignee'),
 
 ]
 
