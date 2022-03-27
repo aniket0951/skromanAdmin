@@ -19,12 +19,12 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # sales app urls
+    # sales app urls-------this url valid only for sales app functionalities
     path('sales/', include('SalesApp.salesurl')),
 
-    # admin app urls
+    # admin app urls-------this url valid only for admin app functionalities
     path('adminapp/', include('AdminApp.adminurl')),
 
-    # installation app urls
+    # installation app urls-------this url valid only for installation app functionalities
     path('installation/', include('Installation.installationurl')),
 ]
