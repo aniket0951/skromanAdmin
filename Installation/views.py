@@ -136,12 +136,6 @@ class ComplaintListView(ListView):
         user = Users.objects.filter(user_dept="Installation").all()
         context['users'] = user
         context['department'] = 'Installation'
-        search = self.request.GET.get('search')
-        # if search:
-        #     data = context.get("complaints")
-        #     lead_id = data[0].lead_id
-        #     leads = LeadModel.objects.filter(id=lead_id).all()
-
 
         return context
 
@@ -198,6 +192,23 @@ class AssignComplaintListView(ListView):
         context['users'] = user
         context['department'] = 'Installation'
         context["assign"] = "assign-show"
+
+        # search by placeholder
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(complaint_id__lead_id__name__icontains=search) | Q(complaint_id__lead_id__site_name__icontains=search)
+                                             | Q (complaint_id__lead_id__contact__icontains=search) | Q(complaint_id__lead_id__city__icontains=search)
+                                             | Q (complaint_id__appointment_date__icontains=search))\
+                                              .all()
+            
+            context.update({"assign_complete": data})
+
+        # date filter searching
+        startdate = self.request.GET.get('startdate')
+        enddate = self.request.GET.get('enddate')
+        if startdate and enddate:
+            data = self.get_queryset().filter(ctime____range=[str(startdate), str(enddate)], lookup_expr='date__gte').all()
+            context.update({"assign_complete": data})
 
         return context
 
