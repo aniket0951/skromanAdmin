@@ -2,6 +2,7 @@ from django.db import models
 from AdminApp.models import *
 from Installation.models import *
 
+
 # leads model class
 class LeadModel(models.Model):
     lead_type = models.CharField(max_length=40, null=True, blank=True)
@@ -28,6 +29,7 @@ class LeadModel(models.Model):
 
     class Meta:
         db_table = 'leads'
+
 
 class LeadNotes(models.Model):
     note_comment = models.TextField(blank=True, null=True)

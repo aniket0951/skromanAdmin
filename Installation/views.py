@@ -100,6 +100,14 @@ class LeadListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['department'] = 'Installation'
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(name__icontains=search) | Q(contact__icontains=search)
+                                              | Q(site_name__icontains=search) | Q(city__icontains=search)
+                                              | Q(pin_code__icontains=search) | Q(ctime__icontains=search))\
+                                         .all()
+            serializers = LeadSerializer(data, many=True)
+            context.update({"leads": serializers.data})
 
         return context
 
@@ -128,6 +136,13 @@ class ComplaintListView(ListView):
         user = Users.objects.filter(user_dept="Installation").all()
         context['users'] = user
         context['department'] = 'Installation'
+        search = self.request.GET.get('search')
+        # if search:
+        #     data = context.get("complaints")
+        #     lead_id = data[0].lead_id
+        #     leads = LeadModel.objects.filter(id=lead_id).all()
+
+
         return context
 
 
@@ -178,7 +193,7 @@ class AssignComplaintListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AssignComplaintListView, self).get_context_data(**kwargs)
-        data = ComplaintSerializer(self.queryset, many=True)
+        # data = ComplaintSerializer(self.queryset, many=True)
         user = Users.objects.filter(user_dept="Installation").all()
         context['users'] = user
         context['department'] = 'Installation'
