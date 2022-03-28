@@ -16,7 +16,7 @@ urlpatterns = [
     # to pk based operation
     path('InstallationPKClass/<int:pk>/', InstallationPKClass.as_view(), name='installation_pk'),
 
-    # get all user list
+    # get all user list and search filters
     path('UserListView/', UserListView.as_view(), name='user_list'),
 
     # add complaint

@@ -81,6 +81,13 @@ class UserListView(ListView):
         context = super(UserListView, self).get_context_data(**kwargs)
         context['department'] = 'Installation'
         context['edit'] = 'show'
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(
+                Q(name__icontains=search) | Q(user_dept__icontains=search) | Q(designation__icontains=search)).all()
+            serializers = UserSerializer(data, many=True)
+            context.update({"users": serializers.data})
+
         return context
 
 
@@ -121,8 +128,8 @@ class ComplaintListView(ListView):
         user = Users.objects.filter(user_dept="Installation").all()
         context['users'] = user
         context['department'] = 'Installation'
-
         return context
+
 
 # get and update a complaint details
 class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
@@ -133,20 +140,22 @@ class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIVie
         date = (self.get_object().appointment_date)
 
         context = {
-            'department' :'Installation',
-            "assign" :"complaint_update",
-            "data" :self.get_object(), 
+            'department': 'Installation',
+            "assign": "complaint_update",
+            "data": self.get_object(),
             "appointment_date": date.strftime(str(date))
-        } 
-        return render(request, "AddComplaints.html", context)    
+        }
+        return render(request, "AddComplaints.html", context)
 
     def post(self, request, *args, **kwargs):
         update = self.update(request, *args, **kwargs)
         if update:
             messages.success(request, "Complaint details updated successfully")
-            return redirect('complaints')    
+            return redirect('complaints')
 
-# assign the complaint
+        # assign the complaint
+
+
 class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
@@ -159,8 +168,6 @@ class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView)
 
         messages.success(request, "Complaint assigned successfully")
         return redirect('complaints')
-
-
 
 
 # display all complaints with assigned details
@@ -179,8 +186,9 @@ class AssignComplaintListView(ListView):
 
         return context
 
+
 # update a complete assign engineer installation
-class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin,GenericAPIView):
+class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
 
@@ -194,8 +202,8 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin,GenericAPIView)
         user = Users.objects.filter(user_dept="Installation").all()
         context = {
             'users': user,
-            'department' :'Installation',
-            "assign" :"update",
-            "data" :self.get_object()
+            'department': 'Installation',
+            "assign": "update",
+            "data": self.get_object()
         }
-        return render(request, "Complaints.html", context)  
+        return render(request, "Complaints.html", context)
