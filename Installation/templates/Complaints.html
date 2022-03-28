@@ -237,16 +237,20 @@
 
                                         </td>
                                         <td>
-                                            <form action="{% url 'update_complaint_details' i.id %}" class="d-inline">
-                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            <form action="{% url 'update_complaint_details' i.id %}" class="" style="display:flex;">
+                                                <button type="submit" class="btn btn-primary">Edit</button>&nbsp;
+                                                 <button type="submit" class="btn btn-primary">Assign</button>
                                             </form>
+                                        </td>
+                                        <td>
                                             <form action="{% url 'complaint_assign' %}" method="post" class="d-inline">
                                                 <input type="text" name="user_id" value="" id="user_id1"
                                                     style="display: none;">
                                                 <input type="text" name="complaint_id" value="{{ i.id }}"
                                                     style="display: none;">
-                                                <button type="submit" class="btn btn-primary">Assign</button>
+
                                             </form>
+
                                         </td>
 
                                     </tr>
