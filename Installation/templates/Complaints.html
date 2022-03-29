@@ -40,9 +40,14 @@
             <div class="col-lg-12 col-md-12">
                 <div class="topnav2">
                     <a href=""><strong>Assign Complaints </strong></a>
+                    <form action="{% url 'assign_complete' %}" class="datefilter">
+                        <input type="date" class="dateinput" name="startdate">
+                        <input type="date" class="dateinput" name="enddate" >
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
                     <div class="search-container">
-                        <form action="/action_page.php">
-                            <input type="text" placeholder="Search.." name="search">
+                        <form action="{% url 'assign_complete' %}">
+                            <input class="searchbar" type="text" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -72,7 +77,7 @@
                                     {% for i in assign_complete %}
                                     <tr>
                                         <td>Kolte Patil</td>
-                                        <td>{{ i.complaint_id.lead_id.name }}</td>
+                                        <td>{{ i.complaint_id.lead_id.site_name }}</td>
                                         <td>{{ i.complaint_id.lead_id.contact }}</td>
                                         <td>{{ i.complaint_id.lead_id.city }}</td>
                                         <td>{{ i.complaint_id.complaint_des }}</td>
@@ -189,7 +194,7 @@
                 <div class="topnav2">
                     <a href=""><strong>Complaints</strong></a>
                     <div class="search-container">
-                        <form action="/action_page.php">
+                        <form action="{% url 'complaints' %}">
                             <input type="text" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
