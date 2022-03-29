@@ -174,6 +174,7 @@ class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView)
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
 
+
     def post(self, request, *args, **kwargs):
         insert = self.create(request, *args, **kwargs)
         if insert:
@@ -212,9 +213,9 @@ class AssignComplaintListView(ListView):
         # date filter searching
         startdate = self.request.GET.get('startdate')
         enddate = self.request.GET.get('enddate')
+        print(startdate, enddate)
         if startdate and enddate:
-            data = self.get_queryset().filter(ctime____range=[str(startdate), str(enddate)],
-                                              lookup_expr='date__gte').all()
+            data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate)) | Q(complaint_id__appointment_date__range=(startdate, enddate))).all()
             context.update({"assign_complete": data})
 
         return context
