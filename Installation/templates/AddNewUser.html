@@ -88,7 +88,7 @@
                 <div class="topnav2">
                     <a href=""><strong>Leads</strong></a>
                     <div class="search-container">
-                        <form action="/action_page.php">
+                        <form action="{% url 'user_list' %}">
                             <input type="text" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
@@ -126,14 +126,6 @@
                                                 <button class="btn btn-primary">Edit</button>
                                             </form>
                                         </td>
-                                        <!-- <td>
-                                            <button
-                                            onclick="editUser('{{ i.name }}', '{{ i.email }}', '{{ i.user_dept }}',
-                                                              '{{ i.designation }}', '{{ i.work }}', '{{ i.is_active }}', '{{ i.id }}')"
-                                            class="btn btn-primary">Edit</button>
-
-
-                                        </td> -->
                                     </tr>
                                     {% endfor %}
                                 </tbody>

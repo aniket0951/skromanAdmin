@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from .views import *
 urlpatterns = [
-
+    #
     path('usermodes/<str:tag>/', OpenUserModes, name="usermodes"),
 
     # add a new lead here
@@ -25,13 +25,12 @@ urlpatterns = [
 
     # lead note operation
     path('leadnote/<int:pk>/', LeadNotes.as_view(), name='lead_notes'),
-
     # add new lead note
     path('lead_note_class/', LeadNoteClass.as_view(), name='lead_note_class'),
 
 
     path('SkromanVideo/', SkromanVideo, name='SkromanVideo'),
 
-    path('DeviceImages/', DeviceImages, name='DeviceImages')
+    path('DeviceImages/', DeviceImages, name='DeviceImages'),
 
 ]

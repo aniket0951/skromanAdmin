@@ -21,8 +21,13 @@
             <div class="col-lg-12 col-md-12">
                 <div class="topnav2">
                     <a href=""><strong>Leads</strong></a>
+                    <form action="{% url 'lead_list' %}" class="datefilter">
+                        <input type="date" class="dateinput" name="startdate">
+                        <input type="date" class="dateinput" name="enddate">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
                     <div class="search-container">
-                        <form action="/action_page.php">
+                        <form action="{% url 'lead_list' %}">
                             <input type="text" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
@@ -45,7 +50,7 @@
                                         <th scope="col">Up Comming</th>
                                         <th scope="col">Lead Status</th>
                                         <th scope="col">Action</th>
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,13 +64,14 @@
                                         <td>{{ i.pin_code }}</td>
                                         <td>{{ i.ctime }}</td>
                                         <td>Present Lead</td>
-                                        
+
                                         <td>
                                             <form action="{% url 'open_complaint' i.id %}" class="d-inline">
-                                                <button type="submit" class="btn btn-primary">Add Complaint</button>
+                                                <button type="submit" class="btn btn-primary btn-sm">Add
+                                                    Complaint</button>
                                             </form>
                                         </td>
-                                       
+
                                     </tr>
                                     {% endfor %}
                                 </tbody>
