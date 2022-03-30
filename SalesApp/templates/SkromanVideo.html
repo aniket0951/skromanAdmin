@@ -1,45 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>
-		Embedding YouTube video in Bootstrap modal
-	</title>
+  <meta charset="utf-8">
+  <title>
+    Embedding YouTube video in Bootstrap modal
+  </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-	</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+  </script>
   <style>
-    .viewVideo{
-      padding-top:50px;
+    .viewVideo {
+      padding-top: 50px;
     }
-    .productClose{
-    position:relative;
-    float:right;
-    right:90px;
-    top : -25px
+
+    .productClose {
+      position: relative;
+      float: right;
+      right: 90px;
+      top: -25px
     }
+
     .productClose i {
-    font-size:30px;
-    color : grey
+      font-size: 30px;
+      color: grey
     }
   </style>
 
 </head>
 
 <body>
-	<div class="viewVideo">
-      <center>
-        <h3>Skroman video</h3>
-        <a class="productClose" href="{% url 'usermodes' 'openpresentation' %}" ><i class="fa fa-times" aria-hidden="true"></i></a>
-		<video width="80%" height="600" controls>
-          <source src="..\..\..\static\img\Skroman.mp4" type="video/mp4">
-        </video>
-      </center>
-	</div>
+  <div class="viewVideo">
+    <center>
+      <h3>Skroman video</h3>
+      <a class="productClose" href="{% url 'usermodes' 'openpresentation' %}"><i class="fa fa-times"
+          aria-hidden="true"></i></a>
+      <video width="80%" height="600" controls>
+        <source src="/static/img/Skroman.ogg" type="video/ogg">
+        <source src="/static/img/Skroman.mp4" type="video/mp4">
+
+        Your browser does not support HTML video.
+      </video>
+    </center>
+  </div>
 </body>
 
 </html>
