@@ -42,7 +42,7 @@
                     <a href=""><strong>Assign Complaints </strong></a>
                     <form action="{% url 'assign_complete' %}" class="datefilter">
                         <input type="date" class="dateinput" name="startdate">
-                        <input type="date" class="dateinput" name="enddate" >
+                        <input type="date" class="dateinput" name="enddate">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </form>
                     <div class="search-container">
@@ -236,15 +236,16 @@
 
                                             <select id="users" name="user_id" onchange="SelectUser()">
                                                 {% for j in users %}
-                                                <option value="{{ j.id }}">{{ j.name }}</option>
+                                                <option value="{{ j.id }}" selected>{{ j.name }}</option>
                                                 {% endfor %}
                                             </select>
 
                                         </td>
                                         <td>
-                                            <form action="{% url 'update_complaint_details' i.id %}" class="" style="display:flex;">
+                                            <form action="{% url 'update_complaint_details' i.id %}" class=""
+                                                style="display:flex;">
                                                 <button type="submit" class="btn btn-primary">Edit</button>&nbsp;
-                                                 <button type="submit" class="btn btn-primary">Assign</button>
+
                                             </form>
                                         </td>
                                         <td>
@@ -253,11 +254,10 @@
                                                     style="display: none;">
                                                 <input type="text" name="complaint_id" value="{{ i.id }}"
                                                     style="display: none;">
+                                                <button type="submit" class="btn btn-primary">Assign</button>
 
                                             </form>
 
-
-                                        </td>
 
                                         </td>
 
@@ -296,6 +296,7 @@
             $('.parenttab').show();
             $('#show').show();
         })
+
 
     </script>
     <script src="/static/js/complaint.js"></script>
