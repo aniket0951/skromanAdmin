@@ -106,8 +106,13 @@ class LeadListView(ListView):
                                               | Q(site_name__icontains=search) | Q(city__icontains=search)
                                               | Q(pin_code__icontains=search) | Q(ctime__icontains=search)) \
                 .all()
-            serializers = LeadSerializer(data, many=True)
-            context.update({"leads": serializers.data})
+            context.update({"leads": data})
+
+        startdate = self.request.GET.get('startdate')
+        enddate = self.request.GET.get('enddate')
+        if startdate and enddate:
+            data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate))).all()
+            context.update({"leads": data})    
 
         return context
 
@@ -137,10 +142,17 @@ class ComplaintListView(ListView):
         context['users'] = user
         context['department'] = 'Installation'
         search = self.request.GET.get('search')
-        # if search:
-        #     data = context.get("complaints")
-        #     lead_id = data[0].lead_id
-        #     leads = LeadModel.objects.filter(id=lead_id).all()
+        if search:
+            data = self.get_queryset().filter(Q(lead_id__site_name__icontains=search) | Q(lead_id__city__icontains=search)
+                                             | Q(lead_id__contact__icontains=search) | Q(device__icontains=search))\
+                                          .all()
+            context.update({'complaints': data})
+
+        startdate = self.request.GET.get('startdate')
+        enddate = self.request.GET.get('enddate')
+        if startdate and enddate:
+            data = self.get_queryset().filter(appointment_date__range=(startdate, enddate)).all()    
+            context.update({'complaints': data})
 
         return context
 
@@ -213,7 +225,6 @@ class AssignComplaintListView(ListView):
         # date filter searching
         startdate = self.request.GET.get('startdate')
         enddate = self.request.GET.get('enddate')
-        print(startdate, enddate)
         if startdate and enddate:
             data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate)) | Q(complaint_id__appointment_date__range=(startdate, enddate))).all()
             context.update({"assign_complete": data})

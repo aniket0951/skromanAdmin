@@ -8,6 +8,7 @@ from django.views.generic.list import ListView
 from Installation.models import *
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
 
 
 # Create your views here.
@@ -150,9 +151,16 @@ class ClientListView(ListView):
         context = super(ClientListView, self).get_context_data(**kwargs)
         context['department'] = 'Sales'
 
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(name__icontains=search) | Q(c_type__icontains=search)
+                                            | Q(contact__icontains=search)| Q(city__icontains=search)
+                                            | Q(pin_code__icontains=search))\
+                                      .all()
+            context.update({'client_data': data})                          
         return context
 
-
+ 
 # crud operation for lead notes
 class LeadNoteClass(ListModelMixin, RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = LeadNotes.objects.all()
