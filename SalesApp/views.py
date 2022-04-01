@@ -106,6 +106,17 @@ class LeadListView(ListView):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['department'] = 'Sales'
 
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(city__icontains=search) | Q(contact__icontains=search)
+                                             | Q(pin_code__icontains=search) | Q(name__icontains=search)
+                                             | Q(name__icontains=search))\
+                                      .all()
+            if data:
+                context.update({'leads': data}) 
+            else:
+                messages.error(self.request, 'Invalid information for searching')                      
+
         return context
 
 
