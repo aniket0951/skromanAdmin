@@ -199,7 +199,7 @@ class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView)
 
 # display all complaints with assigned details
 class AssignComplaintListView(ListView):
-    queryset = ComplaintAssignModel.objects.all()
+    queryset = ComplaintAssignModel.objects.all().order_by('-id')
     template_name = 'Complaints.html'
     context_object_name = 'assign_complete'
 

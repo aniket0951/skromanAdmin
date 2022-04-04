@@ -223,7 +223,7 @@
                 <h5>{{ i.contact }}</h5>
                 <h5>{{ i.city }}</h5>
                 <h5>{{ i.pin_code }}</h5>
-                <h5>Present Lead</h5>
+                <h5>style:"colo"</h5>
                 <h5>{{ i.ctime }}</h5>
                 <button
                     onclick="cardValue('{{ i.name }}', '{{ i.email }}',
@@ -254,8 +254,8 @@
                 <div class="topnav2">
                     <a href=""><strong>Leads</strong></a>
                     <div class="search-container">
-                        <form action="/action_page.php">
-                            <input name = "q" type="search" placeholder="Search.." name="search">
+                        <form action="{% url 'leadhome' %}">
+                            <input  type="text" placeholder="Search.." name="search">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -277,7 +277,7 @@
                                         <th scope="col">Up Coming</th>
                                         <th scope="col">Lead Status</th>
                                         <th scope="col">Edit</th>
-                                        <th scope="col">Followp</th>
+                                        <th scope="col">Followup</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -290,7 +290,8 @@
                                         <td>{{ i.city }}</td>
                                         <td>{{ i.pin_code }}</td>
                                         <td>{{ i.ctime }}</td>
-                                        <td>Present Lead</td>
+                                        <td style="width:150px;"><b><span style="border:1px solid green; padding:5px;color:white;background-color:green;">Present Lead</span></b></td>
+
                                         <td>
                                             <button
                                                 onclick="leadEdit('{{ i.name }}', '{{ i.email }}',
@@ -381,7 +382,8 @@
 
             <div class="form-group">
                 <label for="exampleInputPassword1">Refrence Type</label>
-                <select id="ref_type" class="form-select" name="ref_type" aria-label="Default select example">                  <option value="Builder">Builder</option>
+                <select id="ref_type" class="form-select" name="ref_type" aria-label="Default select example">
+                    <option value="Builder">Builder</option>
                   <option value="Architect">Architect</option>
                   <option value="Interior Design">Interior Design</option>
                   <option value="System Integrator">System Integrator</option>

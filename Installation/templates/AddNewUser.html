@@ -119,7 +119,11 @@
                                         <td>{{ i.user_dept }}</td>
                                         <td>{{ i.designation }}</td>
                                         <td>{{ i.work }}</td>
-                                        <td>{{ i.is_active }}</td>
+                                        {% if i.is_active == 1%}
+                                        <td>Working</td>
+                                        {% else %}
+                                        <td>Ex-Worker</td>
+                                        {% endif %}
                                         <td>
 
                                             <form action="{% url 'installation_pk' i.id %}">
