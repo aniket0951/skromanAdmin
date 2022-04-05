@@ -8,7 +8,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Lead</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--    <link rel="stylesheet" href="..\..\..\static\css\Leads.css">-->
     <link rel="stylesheet" href="/static/css/leads.css">
+    <script>
+		$(document).ready(function() {
+			var url = $("#video1").attr('src');
+			$("#myModal").on('hide.bs.modal', function() {
+				$("#video1").attr('src', '');
+			});
+			$("#myModal").on('show.bs.modal', function() {
+				$("#video1").attr('src', url);
+			});
+		});
+
+    </script>
+
+
 </head>
 
 
@@ -128,111 +148,200 @@
             margin-top: 10px;
         }
     }
+
 </style>
 
 
 <body>
 
-    {% block content %}
-
-    <div id="formdiv" class="container-fluid parentclass">
-        <h4 style="text-align: center;">Add New Lead</h4>
-        <form action="{% url 'leads' %}" method="post">
-            <div class="mb-3" id="dropDown1">
-                <label for="pwd" class="form-label">Lead Type</label>
-                <select id="list" class="form-select" name="lead_type" aria-label="Default select example">
-                    <option name="" id="dropOptions" selected>Indivisual</option>
-                    <option value="Builder">Builder</option>
-                </select>
-            </div>
-
-            <div class="mb-3" id="dropDown1">
-                <label for="pwd" class="form-label">Leads</label>
-                <select id="list" class="form-select" name="leads" aria-label="Default select example">
-                    <option name="" id="dropOptions" selected>Online</option>
-                    <option value="Dealer">Dealer</option>
-                    <option value="Architect">Architect</option>
-                    <option value="Builder">Builder</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Name</label>
-                <input type="text" class="form-control" name="name" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Mobile Number</label>
-                <input type="number" class="form-control" name="contact" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Email Id</label>
-                <input type="email" class="form-control" name="email" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Billing Address</label>
-                <input type="text" class="form-control" name="billing_address" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Shipping Address</label>
-                <input type="text" class="form-control" name="shipping_address" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group" style="display: block;">
-                <label for="exampleInputPassword1">City</label>
-                <input type="text" class="form-control" name="city" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group" style="display: block;">
-                <label for="exampleInputPassword1">Pin</label>
-                <input type="text" class="form-control" name="pin_code" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Note</label>
-                <input type="text" class="form-control" name="note_comment" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Next Follwup Date</label>
-                <input type="date" class="form-control" name="next_followup" id="clientSiteAddress">
-            </div>
-
-            <div class="form-group" style="display: block;">
-                <label for="exampleInputPassword1">Sales User</label>
-                <input type="number" class="form-control" name="sales_user" id="clientSiteAddress">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add Lead</button>
-            <a onclick="openPresentation()" class="btn btn-primary " style="text-decoration: none;">Skip</a>
-        </form>
-
-    </div>
-
-    <!-- showing video links and presentation -->
-    <div class="presentation" id="presentation" style="display: none;">
+{% block content %}
+{% if presentation == 'presentation' %}
+<!-- showing video links and presentation -->
+<div class="presentation" id="presentation" style="display: block;">
+    <div class="container w-50 mainProduct two">
         <div class="row">
-            <div class="column">
-                <a href="https://youtu.be/S4xvi_EEmEw">
-                    <img src="https://www.logo.wine/a/logo/YouTube/YouTube-Icon-Full-Color-Logo.wine.svg" alt="Snow"
-                        style="width:10%">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <!-- Image to Open the Modal -->
+                <img src="..\..\..\static\img\youtube.png" alt="Snow" style="width:100%; cursor:pointer" data-toggle="modal"
+                     data-target="#myModal">
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3>Skroman House</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <iframe id="video1" width="100%" height="555"
+                                        src="https://www.youtube.com/embed/zj8KCxb0JJA"
+                                        frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'SkromanVideo' %}">
+                    <img src="..\..\..\static\img\video-player.png" alt="Forest" style="width:100%">
                 </a>
             </div>
-            <div class="column">
-                <img src="img_forest.jpg" alt="Forest" style="width:100%">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'DeviceImages' %}">
+                    <img src="..\..\..\static\img\image-gallery.png" alt="Mountains" style="width:100%">
+                </a>
             </div>
-            <div class="column">
-                <img src="img_mountains.jpg" alt="Mountains" style="width:100%">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'DeviceImages' %}">
+                    <img src="..\..\..\static\img\brochure.png" alt="Mountains" style="width:100%">
+                </a>
             </div>
         </div>
     </div>
-    {% endblock %}
 
-    <script>
+</div>
+{% else %}
+<div id="formdiv" class="container-fluid parentclass">
+    <h4 style="text-align: center;">Add New Lead</h4>
+    <form action="{% url 'leads' %}" method="post">
+        <div class="mb-3" id="dropDown1">
+            <label for="pwd" class="form-label">Lead Type</label>
+            <select id="list" class="form-select" name="lead_type" aria-label="Default select example">
+                <option name="" id="dropOptions" selected>Indivisual</option>
+                <option value="Builder">Builder</option>
+            </select>
+        </div>
+
+        <div class="mb-3" id="dropDown1">
+            <label for="pwd" class="form-label">Leads</label>
+            <select id="list" class="form-select" name="leads" aria-label="Default select example">
+                <option name="" id="dropOptions" selected>Online</option>
+                <option value="Dealer">Dealer</option>
+                <option value="Architect">Architect</option>
+                <option value="Builder">Builder</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Name</label>
+            <input type="text" class="form-control" name="name" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Mobile Number</label>
+            <input type="number" class="form-control" name="contact" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Email Id</label>
+            <input type="email" class="form-control" name="email" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Billing Address</label>
+            <input type="text" class="form-control" name="billing_address" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Shipping Address</label>
+            <input type="text" class="form-control" name="shipping_address" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group" style="display: block;">
+            <label for="exampleInputPassword1">City</label>
+            <input type="text" class="form-control" name="city" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group" style="display: block;">
+            <label for="exampleInputPassword1">Pin</label>
+            <input type="text" class="form-control" name="pin_code" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Note</label>
+            <input type="text" class="form-control" name="note_comment" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Next Followup Date</label>
+            <input type="date" class="form-control" name="next_followup" id="clientSiteAddress">
+        </div>
+
+        <div class="form-group" style="display: block;">
+            <label for="exampleInputPassword1">Sales User</label>
+            <input type="number" class="form-control" name="sales_user" id="clientSiteAddress">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Lead</button>
+        <a onclick="openPresentation()" class="btn btn-primary " style="text-decoration: none;">Skip</a>
+    </form>
+
+</div>
+{% endif %}
+
+<div class="presentation" id="presentation" style="display: none;">
+    <div class="container w-50 mainProduct two">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <!-- Image to Open the Modal -->
+                <img src="..\..\..\static\img\youtube.png" alt="Snow" style="width:100%; cursor:pointer" data-toggle="modal"
+                     data-target="#myModal">
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3>Skroman House</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;
+                                </button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <iframe id="video1" width="100%" height="555"
+                                        src="https://www.youtube.com/embed/zj8KCxb0JJA"
+                                        frameborder="0" allowfullscreen>
+                                </iframe>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'SkromanVideo' %}">
+                    <img src="..\..\..\static\img\video-player.png" alt="Forest" style="width:100%">
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'DeviceImages' %}">
+                    <img src="..\..\..\static\img\image-gallery.png" alt="Mountains" style="width:100%">
+                </a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <a href="{% url 'DeviceImages' %}">
+                    <img src="..\..\..\static\img\brochure.png" alt="Mountains" style="width:100%">
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+<script>
         function openPresentation() {
             var presentation = document.getElementById('presentation');
             var formdiv = document.getElementById('formdiv');
@@ -240,7 +349,8 @@
             presentation.style.display = 'block';
             formdiv.style.display = 'none';
         }
-    </script>
+
+</script>
 </body>
 
 </html>

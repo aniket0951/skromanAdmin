@@ -2,13 +2,91 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Installation Department</title>
+    <link rel="stylesheet" href="/static/css/bom.css">
 </head>
+
 <body>
-    
+    {% block content %}
+
+    <!-- show table view -->
+    <section class="parenttab" id="bomVerificationSection">
+
+        <div class="row child_tab">
+            <div class="col-lg-12 col-md-12">
+                <div class="topnav2">
+                    <a href=""><strong>Leads</strong></a>
+                    <form action="{% url 'lead_list' %}" class="datefilter">
+                        <input type="date" class="dateinput" name="startdate">
+                        <input type="date" class="dateinput" name="enddate">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                    <div class="search-container">
+                        <form action="{% url 'lead_list' %}">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-content" style="margin-top: -10px;">
+                    <!-- Sales Department -->
+                    <div class="table_parent_div  tab-pane active" id="new">
+                        <div class="basic_info_card table_card" id="menu3">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Client Name</th>
+                                        <th scope="col">Site Name</th>
+                                        <th scope="col">Mobile Number</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">Pin</th>
+                                        <th scope="col">Up Comming</th>
+                                        <th scope="col">Lead Status</th>
+                                        <th scope="col">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i in leads %}
+                                    <tr>
+                                        <td>{{ i.ctime }}</td>
+                                        <td>{{ i.name }}</td>
+                                        <td>{{ i.site_name }}</td>
+                                        <td>{{ i.contact }}</td>
+                                        <td>{{ i.city }}</td>
+                                        <td>{{ i.pin_code }}</td>
+                                        <td>{{ i.ctime }}</td>
+                                        <td style="width:150px;"><b><span style="border:1px solid green; padding:5px;color:white;background-color:green;">Present Lead</span></b></td>
+
+                                        <td>
+                                            <form action="{% url 'open_complaint' i.id %}" class="d-inline">
+                                                <button type="submit" class="btn btn-primary btn-sm">Add
+                                                    Complaint</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <h1>{{ data }}</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}
 </body>
+
 </html>

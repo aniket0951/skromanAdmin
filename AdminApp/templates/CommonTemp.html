@@ -117,13 +117,16 @@
         <a class="active" href="#">Home</a>
         <a href="#">Production User</a>
         {% elif department == 'Sales' %}
-        <a class="active" href="{% url 'usermodes' 'openmode' %}">Home</a>
-        <a href="{% url 'client_details' %}">Client</a>
-        <a href="{% url 'leadhome' %}">Lead</a>
+        <a class="active" href="{% url 'usermodes' 'openmode' %}" style="text-decoration: none">Home</a>
+        <a href="{% url 'client_details' %}" style="text-decoration: none">Client</a>
+        <a href="{% url 'leadhome' %}" style="text-decoration: none">Lead</a>
         {% elif department == 'Installation' %}
         <a class="active" href="{% url 'usermodes' 'openmode' %}">Home</a>
 
-        <a  href="{% url 'installation' 'adduser' %}">Users</a>
+        <a href="{% url 'lead_list' %}">Leads</a>
+
+        <a  href="{% url 'installation' 'adduser' %}" style="text-decoration: none">Users</a>
+        <a href="{% url 'complaints' %}" style="text-decoration: none"> Complaints </a>
 
         {% elif department == 'ProductionMembers' %}
         <a class="active" href="#">Member</a>
@@ -133,7 +136,7 @@
         <a href="#">LEADS</a>
         <a href="#about">TRACK</a>
         <a href="{% url 'client_details' %}">SALES</a>
-        <a href="#">INVANTORY</a>
+        <a href="#">INVENTORY</a>
         <a href="#">PRODUCTION</a>
         <a href="#about" id="account">ACCOUNT</a>
         <a href="#about">INSTALLATION</a>

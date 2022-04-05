@@ -1,0 +1,110 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/leads.css">
+    <link rel="stylesheet" href="/static/css/bom.css">
+
+</head>
+
+<body>
+
+    {% block content %}
+
+    {% if assign == 'complaint_update' %}
+    <div class="center hideform" id="dropdown-popup">
+        <h4 style="text-align: center;">Update Complaint Details</h4>
+        <form action="{% url 'update_complaint_details' data.id %}" method="post">
+
+            <div class="form-group" style="visibility: visible;">
+                <label for="exampleInputPassword1">Lead Id</label>
+                <input type="text" class="form-control" value="{{ data.lead_id_id }}" name="lead_id" readonly
+                    id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Appointment Date</label>
+                <input type="date" class="form-control" value="{{ appointment_date }}" name="appointment_date"
+                    id="date_appointment">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Time Slot</label>
+                <input type="time" class="form-control" value="{{ data.timeslot}}" name="timeslot"
+                    id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Device</label>
+                <input type="text" class="form-control" value="{{ data.device }}" name="device" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Complaint :</label>
+
+            </div>
+            <textarea rows="4" cols="50" name="complaint_des">
+                {{ data.complaint_des }}</textarea>
+            <div class="form-group" style="visibility: hidden;">
+                <label for="exampleInputPassword1">Complaint </label>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="center hideform" id="dropdown-popup">
+        <h4 style="text-align: center;">Add Complaint</h4>
+        <form action="{% url 'complaint_class' %}" method="post">
+
+            <div class="form-group" style="visibility: visible;">
+                <label for="exampleInputPassword1">Lead Id</label>
+                <input type="text" class="form-control" value="{{ lead_id }}" name="lead_id" readonly
+                    id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Appointment Date</label>
+                <input type="date" class="form-control" name="appointment_date" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Time Slot</label>
+                <input type="time" class="form-control" name="timeslot" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Device</label>
+                <input type="text" class="form-control" name="device" id="clientSiteAddress">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Complaint </label>
+
+            </div>
+            <textarea rows="4" cols="50" name="complaint_des">
+                </textarea>
+            <div class="form-group" style="visibility: hidden;">
+                <label for="exampleInputPassword1">Complaint </label>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Complaint</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% endblock %}
+
+
+
+</body>
+
+</html>

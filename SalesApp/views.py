@@ -7,9 +7,12 @@ from django.http import *
 from django.views.generic.list import ListView
 from Installation.models import *
 from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
 
 
 # Create your views here.
+# display a page using tags
 def OpenUserModes(request, tag):
     context = {
         'department': ""
@@ -29,10 +32,16 @@ def OpenUserModes(request, tag):
         context.update({'department': 'Sales'})
         context['skip'] = 'skip'
         return render(request, 'AddLead.html', context)
+    elif tag == 'openpresentation':
+        context.update({'department': 'Sales'})
+        context['skip'] = 'skip'
+        context['presentation'] = 'presentation'
+        return render(request, 'AddLead.html', context)
 
     # create a new lead or add an new lead
 
 
+# crud opertaion about lead like add, delete,get etc
 class LeadClass(CreateModelMixin, RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = LeadModel.objects.all()
     serializer_class = LeadSerializer
@@ -53,6 +62,7 @@ class LeadClass(CreateModelMixin, RetrieveModelMixin, ListModelMixin, UpdateMode
         return self.update(request, *args, **kwargs)
 
 
+# to update a lead details pk opertaions
 class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = LeadModel.objects.all()
     serializer_class = LeadSerializer
@@ -70,12 +80,14 @@ class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
             city = self.request.POST.get('city')
             pin_code = self.request.POST.get('pin_code')
             lead_id = self.request.POST.get('lead_id')
+            ref_type = self.request.POST.get('ref_type')
+            ref_name = self.request.POST.get('ref_name')
 
             data = LeadModel.objects.filter(id=lead_id).update(lead_type=lead_type,
                                                                leads=leads, name=name, email=email,
                                                                contact=contact, billing_address=billing_address,
                                                                shipping_address=shipping_address, city=city,
-                                                               pin_code=pin_code)
+                                                               pin_code=pin_code, ref_type=ref_type, ref_name=ref_name)
             if data:
                 messages.success(self.request, 'Lead update successfully')
                 return redirect('leadhome')
@@ -84,6 +96,7 @@ class LeadUpdate(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
         return self.retrieve(request, *args, **kwargs)
 
 
+# to show hole leads details
 class LeadListView(ListView):
     queryset = LeadModel.objects.all().order_by('-id')
     template_name = 'Leads.html'
@@ -93,9 +106,20 @@ class LeadListView(ListView):
         context = super(LeadListView, self).get_context_data(**kwargs)
         context['department'] = 'Sales'
 
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(name__icontains=search) | Q(contact__icontains=search) |
+                                              Q(city__icontains=search) | Q(email__icontains=search))\
+                                      .all()
+            if data:
+                context.update({'leads': data}) 
+            else:
+                messages.error(self.request, 'Invalid information for searching')                      
+
         return context
 
 
+#  to add a new client
 class ClientClass(CreateModelMixin, ListModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = SkromanClients.objects.all()
     serializer_class = ClientSerializer
@@ -107,12 +131,12 @@ class ClientClass(CreateModelMixin, ListModelMixin, UpdateModelMixin, GenericAPI
             return redirect('client_details')
 
 
+#  to update a client information
 class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     queryset = SkromanClients.objects.all()
     serializer_class = ClientSerializer
 
     def get(self, request, *args, **kwargs):
-        print('get fun called')
         context = {
             'data': self.get_object(),
             'request': 'edit',
@@ -123,10 +147,11 @@ class EditClientClass(RetrieveModelMixin, UpdateModelMixin, GenericAPIView):
     def post(self, request, *args, **kwargs):
         update = self.update(request, *args, **kwargs)
         if update:
-            messages.success(self.request,  'Client information updated successfully')
+            messages.success(self.request, 'Client information updated successfully')
             return redirect('client_details')
 
 
+#  display all client details
 class ClientListView(ListView):
     queryset = SkromanClients.objects.all().order_by('-id')
     template_name = 'SalesHome.html'
@@ -135,10 +160,17 @@ class ClientListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
         context['department'] = 'Sales'
-
+        search = self.request.GET.get('search')
+        if search:
+            data = self.get_queryset().filter(Q(name__icontains=search) | Q(c_type__icontains=search)
+                                            | Q(contact__icontains=search)| Q(city__icontains=search)
+                                            | Q(pin_code__icontains=search))\
+                                      .all()
+            context.update({'client_data': data})                          
         return context
 
-
+ 
+# crud operation for lead notes
 class LeadNoteClass(ListModelMixin, RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = LeadNotes.objects.all()
     serializer_class = LeadNoteSerializer
@@ -158,6 +190,7 @@ class LeadNoteClass(ListModelMixin, RetrieveModelMixin, CreateModelMixin, Generi
             return HttpResponse('Failed to add note, try agian')
 
 
+# display all lead notes details
 class LeadNotes(ListView):
     queryset = LeadNotes.objects.all()
     template_name = 'LeadNotes.html'
@@ -171,3 +204,12 @@ class LeadNotes(ListView):
         context['department'] = 'Sales'
         context['lead_id'] = lead_id
         return context
+
+
+#  redirect to skroman viewVideo
+def SkromanVideo(request):
+    return render(request, 'SkromanVideo.html')
+
+
+def DeviceImages(request):
+    return render(request, 'Device-Images.html')

@@ -146,6 +146,8 @@ h5 {
   float: right;
 }
 
+
+
 .topnav2 input[type="text"] {
   padding: 6px;
   margin-top: 8px;
@@ -162,6 +164,7 @@ h5 {
   font-size: 17px;
   border: none;
   cursor: pointer;
+
 }
 
 .topnav2 .search-container button:hover {
@@ -201,3 +204,34 @@ h5 {
   margin-top: 80px;
   margin-bottom: 20px;
 }
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.hideform {
+  display: block;
+}
+
+
+/* complaint */
+.topnav2 .datefilter{
+  margin: auto;
+  margin-left: 190px;
+  margin-right: 390px;
+}
+.topnav2 .datefilter .dateinput{
+  margin-top: 8px;
+}
+/*
+.presentgreen {
+style="border:1px solid green;
+padding:5px;
+color:white;
+background-color:green;
+}
+*/

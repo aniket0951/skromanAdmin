@@ -40,7 +40,7 @@ function cardValue(name, email, contact, city, pin_code, ctime, lead_type, lead,
 
 }
 
-function leadEdit(name, email, contact, city, pin_code, ctime, lead_type, lead, billing_address, shipping_address, pk) {
+function leadEdit(name, email, contact, city, pin_code, ctime, lead_type, lead, billing_address, shipping_address, pk, ref_type, ref_name) {
   // alert(pk)
   var table_view = document.getElementById("bomVerificationSection");
   var editLead = document.getElementById("editLead");
@@ -60,7 +60,8 @@ function leadEdit(name, email, contact, city, pin_code, ctime, lead_type, lead, 
   var l_billing_add = document.getElementById("billing_address");
   var l_shipping_add = document.getElementById("shipping_address");
   var lead_id = document.getElementById('lead_id');
-
+  var l_ref_type = document.getElementById('ref_type');
+  var l_ref_name = document.getElementById('ref_name');
 
   l_name.value = name
   l_email.value = email
@@ -72,6 +73,8 @@ function leadEdit(name, email, contact, city, pin_code, ctime, lead_type, lead, 
   l_lead.value = lead
   l_billing_add.value = billing_address
   l_shipping_add.value = shipping_address
+  l_ref_type.value = ref_type
+  l_ref_name.value = ref_name
 }
 
 function updateLead(pk){

@@ -32,3 +32,14 @@ body {
   clear: both;
   display: table;
 }
+
+.mainProduct{
+      position:relative;
+      top:150px;
+    }
+    .two {
+  border: 25px solid green;
+  border-radius: 12px;
+  padding: 45px;
+}
+

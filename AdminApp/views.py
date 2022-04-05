@@ -8,11 +8,13 @@ from SalesApp.views import *
 from Installation.views import *
 
 # Create your views here.
+# OpenSkroman firstly checks the login user with cookie system, if new user then provides new credentials(cookies) else matches
+# with the recorded previous values, this functionality is done via the 1st 3 lines of OpenSkroman func as shown below.
 def OpenSkroman(request):
     loginStat = request.COOKIES.get('loginStatus')
     dep = request.COOKIES.get('department')
 
-    email = request.COOKIES.get('email')
+    email = request.COOKIES.get('email')    # checks the email previously generated.
 
     if loginStat == "Login" and IsValidParam(dep, request):
         return navigateScreen(request, dep, email)

@@ -1,5 +1,7 @@
 from django.db import models
 from AdminApp.models import *
+from Installation.models import *
+
 
 # leads model class
 class LeadModel(models.Model):
@@ -20,10 +22,14 @@ class LeadModel(models.Model):
     status_lead = models.CharField(max_length=10, null=True, blank=True)
     pin_code = models.CharField(max_length=40, null=True, blank=True)
     lead_status = models.CharField(max_length=40, null=True, blank=True)
-
+    client = models.ForeignKey(SkromanClients, on_delete=models.CASCADE, related_name="client")
+    site_name = models.CharField(max_length=255, null=True, blank=True)
+    ref_type = models.CharField(max_length=255, null=True, blank=True)
+    ref_name = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         db_table = 'leads'
+
 
 class LeadNotes(models.Model):
     note_comment = models.TextField(blank=True, null=True)
