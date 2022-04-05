@@ -16,3 +16,8 @@ class ComplaintAssignSerializer(ModelSerializer):
     class Meta:
         model = ComplaintAssignModel
         fields = '__all__'
+
+class AssingedUserSerializer(ModelSerializer):
+    class Meta:
+        model = AssignedUsersModel
+        fields = '__all__'
