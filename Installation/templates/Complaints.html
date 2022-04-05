@@ -105,8 +105,14 @@
         </div>
     </section>
     {% elif assign == 'update' %}
+    
     <div class="center hideform" id="dropdown-popup">
         <button onclick="history.back()" id="close" style="float: right;">X</button>
+        <form action="{% url 'get_all_old_engineers' data.id %}" class="addMemberBtn" style="margin-top: -6px;" id="addMemberBtn">
+            <button type="Submit" style="font-family: Courier New, Courier, monospace;" class="btn btn-primary addMemberBtn">
+                Old Engineer </button>
+
+        </form>
         <form action="{% url 'update_assignee' data.id %}" method="post">
             <h4>Change Service Engineer</h4>
             <div class="form-group">
@@ -176,8 +182,35 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="lname">Engineer Change Reason:</label>
+                <input type="text" class="form-control" 
+                    name="assigned_reason" id="appointment_date" required>
+            </div>
+
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
+    </div>
+    {% elif assign == 'assign-show-old-user' %}
+    <div class="notecard" id="notecard">
+        <button class="btn btn-primary" onclick="openAddNoteForm()">Add Note</button>
+        {% if users_data %}
+        {% for i in users_data %}
+        <div class="card">
+            <div class="container">
+                <label for=""><strong>Lead Type:</strong></label>
+                <label for="">{{ i.lead_id.lead_type }}</label><br>
+                
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="card">
+            <div class="card-body">
+                <h5>Note Un-Available</h5>
+            </div>
+        </div>
+        {% endif %}
     </div>
     {% else %}
     <div class="addclientbtn" id="addclientbtn">
@@ -212,7 +245,6 @@
                         <div class="basic_info_card table_card" id="menu3">
                             <table class="table table-hover table-bordered">
                                 <thead>
-                                    {% if complaints %}
                                     <tr>
                                         <th scope="col">Client Name</th>
                                         <th scope="col">Site Name</th>
@@ -226,10 +258,8 @@
                                         <th scope="col">Action</th>
 
                                     </tr>
-                                    {% endif %}
                                 </thead>
                                 <tbody>
-                                    {% if complaints %}
                                     {% for i in complaints %}
                                     <tr>
                                         <td>Kolte Patil</td>
@@ -271,13 +301,6 @@
 
                                     </tr>
                                     {% endfor %}
-                                    {% else %}
-                                    <tr>
-                                        <h3 style="color: red; margin: auto;">
-                                            Sorry currently we don't have any complaint available
-                                        </h3>
-                                    </tr>
-                                    {% endif %}
                                 </tbody>
                             </table>
 

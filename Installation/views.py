@@ -1,3 +1,4 @@
+from gc import get_objects
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
@@ -238,8 +239,17 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
     serializer_class = ComplaintAssignSerializer
 
     def post(self, request, *args, **kwargs):
+        data = self.get_object()
+        user = get_object_or_404(Users, pk=self.request.data.get('user_id'))
+        
         update = self.update(request, *args, **kwargs)
         if update:
+            assign_user_model = AssignedUsersModel()
+            assign_user_model.complaint_assign_id = data
+            assign_user_model.user_id = user
+            assign_user_model.old_user_id = data.user_id
+            assign_user_model.assigned_reason = self.request.data.get('assigned_reason')
+            assign_user_model.save()
             messages.success(request, "Assign Engineer has been updated successfully")
             return redirect('assign_complete')
 
@@ -252,3 +262,15 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
             "data": self.get_object()
         }
         return render(request, "Complaints.html", context)
+
+# get all old engineers data of complaint
+def GetAllOldEngineers(request, complaint_assign_id):
+    obj = AssignedUsersModel.objects.filter(complaint_assign_id=complaint_assign_id).all()
+    obj_ser = AssingedUserSerializer(obj, many=True)
+    context = {
+        "department" :'Installation',
+        "assign" : "assign-show-old-user",
+        "users_data": obj_ser.data
+    }
+
+    return render(request, "Complaints.html", context)

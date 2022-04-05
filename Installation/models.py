@@ -41,16 +41,19 @@ class ComplaintAssignModel(models.Model):
     ctime = models.DateTimeField(auto_now_add=True)
     uptime = models.DateTimeField(auto_now=True)
 
-
     class Meta:
         db_table = 'complaint_assign'
 
+
 # assigned users
-class AssignedUsers(models.Model):
-    complaint_assign_id = models.ForeignKey(ComplaintAssignModel, on_delete=models.CASCADE, related_name="complaint_assigned")
+class AssignedUsersModel(models.Model):
+    complaint_assign_id = models.ForeignKey(ComplaintAssignModel, on_delete=models.CASCADE,
+                                            related_name="complaint_assigned")
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="assignee_user")
+    old_user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="old_assign_user")
+    assigned_reason = models.TextField()
     ctime = models.DateTimeField(auto_now_add=True)
     uptime = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = 'assigned_users' 
+        db_table = 'assigned_users'
