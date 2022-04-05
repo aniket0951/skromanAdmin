@@ -265,12 +265,12 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
 
 # get all old engineers data of complaint
 def GetAllOldEngineers(request, complaint_assign_id):
-    obj = AssignedUsersModel.objects.filter(complaint_assign_id=complaint_assign_id).all()
-    obj_ser = AssingedUserSerializer(obj, many=True)
+    obj = AssignedUsersModel.objects.filter(complaint_assign_id=complaint_assign_id).all()    
+        
     context = {
         "department" :'Installation',
         "assign" : "assign-show-old-user",
-        "users_data": obj_ser.data
+        "users_data": obj
     }
 
     return render(request, "Complaints.html", context)

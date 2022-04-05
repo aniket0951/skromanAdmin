@@ -199,8 +199,20 @@
         {% for i in users_data %}
         <div class="card">
             <div class="container">
+                <label for=""><strong>Complaint ID:</strong></label>
+                <label for="">{{ i.complaint_assign_id.complaint_id_id }}</label><br>
+
                 <label for=""><strong>Reason:</strong></label>
                 <label for="">{{ i.assigned_reason }}</label><br>
+                
+                <label for=""><strong>Old Engineer:</strong></label>
+                <label for="">{{ i.old_user_id.name }}</label><br>
+
+                <label for=""><strong>New Engineer:</strong></label>
+                <label for="">{{ i.user_id.name }}</label><br>
+
+                <label for=""><strong>Date:</strong></label>
+                <label for="">{{ i.ctime }}</label><br>
                 
             </div>
         </div>

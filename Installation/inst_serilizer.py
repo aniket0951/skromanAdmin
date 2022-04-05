@@ -3,7 +3,7 @@ from dataclasses import fields
 from rest_framework.serializers import ModelSerializer
 from .models import *
 from SalesApp.salesSerializer import LeadSerializer
-
+from AdminApp.adminserializer import UserSerializer
 
 class ComplaintSerializer(ModelSerializer):
     lead = LeadSerializer(many=True, read_only=True)
@@ -24,7 +24,8 @@ class ComplaintAssignSerializer(ModelSerializer):
 
 class AssingedUserSerializer(ModelSerializer):
     complaint_assigned = ComplaintAssignSerializer(many=True, read_only=True)
-    assignee_user = ComplaintSerializer(many=True, read_only=True)
+    assignee_user = UserSerializer(many=True, read_only=True)
+    old_assign_user = UserSerializer(many=True, read_only=True)
     class Meta:
         model = AssignedUsersModel
         fields = '__all__'
