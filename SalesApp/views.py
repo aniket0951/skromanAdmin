@@ -108,9 +108,8 @@ class LeadListView(ListView):
 
         search = self.request.GET.get('search')
         if search:
-            data = self.get_queryset().filter(Q(city__icontains=search) | Q(contact__icontains=search)
-                                             | Q(pin_code__icontains=search) | Q(name__icontains=search)
-                                             | Q(name__icontains=search))\
+            data = self.get_queryset().filter(Q(name__icontains=search) | Q(contact__icontains=search) |
+                                              Q(city__icontains=search) | Q(email__icontains=search))\
                                       .all()
             if data:
                 context.update({'leads': data}) 
@@ -161,7 +160,6 @@ class ClientListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
         context['department'] = 'Sales'
-
         search = self.request.GET.get('search')
         if search:
             data = self.get_queryset().filter(Q(name__icontains=search) | Q(c_type__icontains=search)

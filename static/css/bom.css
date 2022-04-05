@@ -146,9 +146,11 @@ h5 {
   float: right;
 }
 
+
+
 .topnav2 input[type="text"] {
   padding: 6px;
-  margin-top: 8px;
+  /* margin-top: 8px; */
   font-size: 17px;
   border: none;
 }
@@ -225,3 +227,11 @@ h5 {
 .topnav2 .datefilter .dateinput{
   margin-top: 8px;
 }
+/*
+.presentgreen {
+style="border:1px solid green;
+padding:5px;
+color:white;
+background-color:green;
+}
+*/
