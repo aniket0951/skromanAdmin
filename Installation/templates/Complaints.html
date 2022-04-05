@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complaints</title>
     <link rel="stylesheet" href="/static/css/bom.css">
+    <link rel="stylesheet" href="/static/css/leads.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
@@ -193,13 +195,12 @@
     </div>
     {% elif assign == 'assign-show-old-user' %}
     <div class="notecard" id="notecard">
-        <button class="btn btn-primary" onclick="openAddNoteForm()">Add Note</button>
         {% if users_data %}
         {% for i in users_data %}
         <div class="card">
             <div class="container">
-                <label for=""><strong>Lead Type:</strong></label>
-                <label for="">{{ i.lead_id.lead_type }}</label><br>
+                <label for=""><strong>Reason:</strong></label>
+                <label for="">{{ i.assigned_reason }}</label><br>
                 
             </div>
         </div>
