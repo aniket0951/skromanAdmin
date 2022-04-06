@@ -39,5 +39,8 @@ urlpatterns = [
     # get all old assigned engineers data of complaint
     path('GetAllOldEngineers/<int:complaint_assign_id>/', GetAllOldEngineers, name='get_all_old_engineers'),
 
+    # ----------------- installation user ------------------------
+    path('UserAssignComplaints/<int:pk>/', UserAssignComplaints.as_view(), name='user_assign_complaints'),
+
 ]
 
