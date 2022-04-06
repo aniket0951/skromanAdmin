@@ -13,14 +13,17 @@ from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
 import datetime
-
+from common.Helper import user_validation
 
 # Create your views here.
 # open a different pages of installation
 def OpenInstallation(request, tag):
     # context = {'department': 'Installation'}
-    if tag == 'installation':
+    
+    if tag.work == 'installation_admin':
         return redirect('lead_list')
+    elif tag.work == 'installation_user':
+        return render(request, "InstallationUserHome.html", {"user": tag}) 
     elif tag == 'adduser':
         return redirect('user_list')
     elif tag == 'addNewUser':
@@ -29,7 +32,8 @@ def OpenInstallation(request, tag):
         context['edit'] = 'addForm'
         return render(request, 'AddNewUser.html', context)
     else:
-        return HttpResponse("no matched tag")
+        return HttpResponse(f"no matched tag {tag.work}")
+
 
 
 def OpenAddComplaint(request, lead_id):
@@ -74,7 +78,7 @@ class InstallationPKClass(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
 
 # get all installation users
 class UserListView(ListView):
-    queryset = Users.objects.all().order_by('-id')
+    queryset = Users.objects.filter(user_dept="Installation").all().order_by('-id')
     template_name = 'AddNewUser.html'
     context_object_name = 'users'
 
@@ -274,3 +278,11 @@ def GetAllOldEngineers(request, complaint_assign_id):
     }
 
     return render(request, "Complaints.html", context)
+
+# ------------------------ classes for  installation user ------------------------ 
+class UserAssignComplaints(RetrieveModelMixin, ListModelMixin, GenericAPIView):
+    queryset = ComplaintAssignModel.objects.all().order_by('-id')
+    serializer_class = ComplaintAssignSerializer
+
+    def get(self, request, *args, **kwargs):
+        data =  self.retrieve(request, *args, **kwargs)

@@ -75,7 +75,13 @@ def navigateScreen(request, department, email):
     elif department == 'Sales':
         return OpenUserModes(request, 'openmode')
     elif department == 'Installation':
-        return OpenInstallation(request,'installation')      
+        user = user_validation(request, "Installation", email)
+        if user:
+            return OpenInstallation(request,user)
+        else:
+            messages.error(request, "Unautheraised user. Please provide a authentication details")
+            return render(request, "Login.html")     
+             
     # elif department == 'Production':
     #     production_user = ProductionUser.objects.filter(emailId=email, department=department)
     #     production_ser = ProductionUserSer(production_user, many=True)

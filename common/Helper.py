@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import smtplib
 import time
+from AdminApp.models import Users
 
 # -------- to check empty values or null point check -------------
 def IsValidParam(param, request):
@@ -40,3 +41,22 @@ def GenerateRandom(max_length):
 def GetAlphNumerical(max_length):
     auth_token = ''.join(random.choice('0123456789ABCDEF') for i in range(max_length)) 
     return auth_token
+
+# validate user credentials
+def user_validation(request, tag, email):
+    if tag == "Installation":
+        try:
+            user = Users.objects.get(email=email, work="installation_user")
+            return user
+        except Users.DoesNotExist:
+            print("user not found")    
+            return admin_user_validation(request, "Installation", email)
+
+# email validation for admin user
+def admin_user_validation(request, tag, email):
+    if tag == "Installation":
+        try:
+            user = Users.objects.get(email=email, work="installation_admin")
+            return user
+        except Users.DoesNotExist:
+            return False    
