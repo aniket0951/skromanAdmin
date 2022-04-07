@@ -1,3 +1,4 @@
+import re
 from rest_framework import exceptions
 import math
 import random  
@@ -6,6 +7,7 @@ from django.conf import settings
 import smtplib
 import time
 from AdminApp.models import Users
+from datetime import datetime, timedelta, date
 
 # -------- to check empty values or null point check -------------
 def IsValidParam(param, request):
@@ -60,3 +62,24 @@ def admin_user_validation(request, tag, email):
             return user
         except Users.DoesNotExist:
             return False    
+
+# convert a datetime into date
+def get_current_date():
+    ts = date.today()
+    return ts
+
+# get time delta
+def get_timedelta_compare(date2):
+    current_date = get_current_date()
+    yesterday = current_date - timedelta(days=1)
+    
+    date1 = (datetime.strptime(str(current_date), "%Y-%M-%d"))
+    da2 = (datetime.strptime(str(date2), "%Y-%M-%d"))
+
+    pending_days = (date1 - da2).days
+
+    if date2 == yesterday:
+        return "Yesterday"
+    else:
+        return f"{pending_days} days" 
+    return yesterday

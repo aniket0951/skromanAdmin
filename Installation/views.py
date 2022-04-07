@@ -2,6 +2,7 @@ from gc import get_objects
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
+from h11 import Data
 from rest_framework.generics import *
 from rest_framework.mixins import *
 from django.contrib import messages
@@ -12,8 +13,9 @@ from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
-import datetime
-from common.Helper import user_validation
+from datetime import date
+from rest_framework.decorators import action,api_view
+from common.Helper import  get_current_date, user_validation,get_timedelta_compare
 
 # Create your views here.
 # open a different pages of installation
@@ -22,18 +24,18 @@ from common.Helper import user_validation
 def OpenInstallation(request, tag):
     # context = {'department': 'Installation'}
 
-    if tag.work == 'installation_admin':
-        return redirect('lead_list')
-    elif tag.work == 'installation_user':
-        return redirect('user_assign_complaints', pk=tag.id)
-        return render(request, "InstallationUserHome.html", {"user": tag})
-    elif tag == 'adduser':
+    
+    if tag == 'adduser':
         return redirect('user_list')
     elif tag == 'addNewUser':
         context = {}
         context['department'] = 'Installation'
         context['edit'] = 'addForm'
         return render(request, 'AddNewUser.html', context)
+    if tag.work == 'installation_admin':
+        return redirect('lead_list')
+    elif tag.work == 'installation_user':
+        return redirect('user_assign_complaints', pk=tag.id)    
     else:
         return HttpResponse(f"no matched tag {tag.work}")
 
@@ -299,14 +301,23 @@ class UserAssignComplaints(ListView):
     queryset = ComplaintAssignModel.objects.all().order_by('-id')
     template_name = 'InstallationUserHome.html'
     context_object_name = 'assign_complete'
+    
 
     def get_context_data(self,*args, **kwargs):
         context = super(UserAssignComplaints,
                         self).get_context_data(**kwargs)  
         data = self.get_queryset().filter(
             user_id=self.kwargs['pk']).all().order_by('-id')
+     
+       
+        for i in data:
+            dates = i.datepublished()
+            two_dates = get_timedelta_compare(dates)
+            print(two_dates)    
+
         context['work_data'] = data
         context['department'] = 'Installation'
         return context
+
 
  

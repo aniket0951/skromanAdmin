@@ -44,6 +44,9 @@ class ComplaintAssignModel(models.Model):
     class Meta:
         db_table = 'complaint_assign'
 
+    def datepublished(self):
+        return self.ctime.date()   
+
 
 # assigned users
 class AssignedUsersModel(models.Model):
