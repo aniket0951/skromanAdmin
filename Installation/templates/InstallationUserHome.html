@@ -226,7 +226,11 @@
         <div class="topnav">
             <a href="#home" class="active1">Home</a>
             <div id="myLinks">
-                <a href="{% url 'client_details' %}">Client</a>
+                <!-- <form action="#">
+                    <input type="submit" name="pending_work", value="Pending Work">
+                </form> -->
+                <a name="pending_work" href="{% url 'user_assign_complaints' work_data.0.user_id_id %}">
+                Pending Work</a>
                 <a href="{% url 'leadhome' %}">Lead</a>
                 <a href="{% url 'usermodes' 'openaddlead' %}">Add Lead</a>
             </div>
@@ -238,46 +242,58 @@
     </div>
 
     <div id="mobilecard">
+        
         {% for i in work_data %}
         <div class="card mobilecard">
             <div class="container">
-                <p>{{ i.assign_work_days }}</p>
+                
+                {% if i.assign_work_days == 'Yesterday' %}
+                <p style="color: orange;  font-weight: bold;">{{ i.assign_work_days }}</p>
+                {% elif i.assign_work_days == 'Today' %}
+                <p style="color: green;  font-weight: bold;">{{ i.assign_work_days }}</p>
+                {% else %}
+                <p style="color: red;  font-weight: bold;">{{ i.assign_work_days }}</p>
+                {% endif %}
                 <label for=""><strong>
                         <h5>Complaint Description:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.complaint_des }}</p>
 
                 <label for=""><strong>
                         <h5>Appointment Date:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.appointment_date }}</p>
 
                 <label for=""><strong>
                         <h5>Device :</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.device }}</p>
 
                 <label for=""><strong>
                         <h5>Lead Name:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.lead_id.name }}</p>
 
                 <label for=""><strong>
                         <h5>Contact:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.lead_id.contact }}</p>
 
                 <label for=""><strong>
                         <h5>Site Name:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.lead_id.site_name }}</p>
 
                 <label for=""><strong>
                         <h5>Address:</h5>
-                    </strong> </label><br>
+                    </strong> </label>
                 <p>{{ i.complaint_id.lead_id.shipping_address }}</p>
 
                 <p>{{ i.ctime }}</p>
+
+                <form action="#">
+                    <button type="submit" class="btn btn-primary">Update Work</button>
+                </form>
                 
             </div>
         </div>

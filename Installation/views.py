@@ -149,7 +149,7 @@ class ComplaintListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ComplaintListView, self).get_context_data(**kwargs)
         data = ComplaintSerializer(self.queryset, many=True)
-        user = Users.objects.filter(user_dept="Installation").all()
+        user = Users.objects.filter(user_dept="Installation", work="installation_user").all()
         context['users'] = user
         context['department'] = 'Installation'
         search = self.request.GET.get('search')
@@ -191,9 +191,8 @@ class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIVie
             messages.success(request, "Complaint details updated successfully")
             return redirect('complaints')
 
-        # assign the complaint
 
-
+# assign the complaint
 class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
@@ -219,7 +218,7 @@ class AssignComplaintListView(ListView):
         context = super(AssignComplaintListView,
                         self).get_context_data(**kwargs)
         # data = ComplaintSerializer(self.queryset, many=True)
-        user = Users.objects.filter(user_dept="Installation").all()
+        user = Users.objects.filter(user_dept="Installation", work="installation_user").all()
         context['users'] = user
         context['department'] = 'Installation'
         context["assign"] = "assign-show"
@@ -311,13 +310,14 @@ class UserAssignComplaints(ListView):
      
        
         for i in data:
-            dates = i.datepublished()
             two_dates = get_timedelta_compare(i.ctime)
-            print(two_dates)
             i.assign_work_days = two_dates
 
         context['work_data'] = data
         context['department'] = 'Installation'
+
+        pending_work = self.request.GET.get('pending_work')
+        print(pending_work)
 
         return context
 

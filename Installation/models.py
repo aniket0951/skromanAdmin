@@ -40,6 +40,7 @@ class ComplaintAssignModel(models.Model):
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE, related_name="assignee")
     ctime = models.DateTimeField(auto_now_add=True)
     uptime = models.DateTimeField(auto_now=True)
+    is_status = models.IntegerField()
 
     # show work day's assign
     # assign_work_days = models.CharField(max_length=120, null=True, blank=True)
