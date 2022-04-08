@@ -1,0 +1,290 @@
+{% include 'CommonTemp.html' %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation User</title>
+    <link rel="stylesheet" href="/static/css/bom.css">
+</head>
+<style>
+    /* Media Query for Mobile Devices */
+    @media (max-width: 480px) {
+        body {
+            /* background-color: red; */
+            background-color: #cee1ed;
+            padding-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: block;
+            width: 100%;
+        }
+
+        .parenttab {
+            display: none;
+        }
+
+        .addclientbtn {
+            display: none;
+        }
+
+        .mobilecard {
+            display: block;
+        }
+
+        .editLeadCard {
+            width: 95%;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+    }
+
+    /* Media Query for low resolution  Tablets, Ipads */
+    @media (min-width: 481px) and (max-width: 767px) {
+        body {
+            background-color: yellow;
+            margin-bottom: 15px;
+        }
+
+        .navigation_bar {
+            margin-left: 0px;
+            background-color: #04aa6d;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: block;
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        .parenttab {
+            margin-top: 60px;
+            margin-left: 160px;
+            width: 90%;
+        }
+
+        .editLeadCard {
+            width: 70%;
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Tablets Ipads portrait mode */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            background-color: blue;
+            margin-bottom: 15px;
+        }
+
+        .mobile-container {
+            display: block;
+        }
+
+        .form_class {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .sidebar {
+            display: block;
+        }
+
+        .nav_div {
+            display: block;
+        }
+
+        .mobilecard {
+            display: block;
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+        }
+        .sidebar {
+            display: none;
+        }
+
+        .nav_div {
+            display: none;
+        }
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Laptops and Desktops */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+        body {
+            background-color: green;
+            margin-bottom: 15px;
+        }
+
+        .sidebar {
+            display: none;
+        }
+
+        .nav_div {
+            display: none;
+        }
+
+        .mobile-container {
+            display: block;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .form_class {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .addclientbtn {
+            display: block;
+            margin-top: 55px;
+        }
+
+        .mobilecard {
+            display: block;
+            width: 90%;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+
+
+        .editLeadCard {
+            margin-left: 180px;
+        }
+    }
+
+    /* Media Query for Large screens */
+    @media (min-width: 1281px) {
+        body {
+            background-color: white;
+        }
+
+        .mobile-container {
+            display: none;
+        }
+
+        .card {
+            display: none;
+        }
+
+        .form_head {
+            margin-left: 310px;
+            margin-top: 120px;
+        }
+
+        .mobilecard {
+            display: none;
+        }
+    }
+</style>
+
+
+<body>
+    {% block content %}
+    <div class="mobile-container">
+
+        <!-- Top Navigation Menu -->
+        <div class="topnav">
+            <a href="#home" class="active1">Home</a>
+            <div id="myLinks">
+                <a href="{% url 'client_details' %}">Client</a>
+                <a href="{% url 'leadhome' %}">Lead</a>
+                <a href="{% url 'usermodes' 'openaddlead' %}">Add Lead</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()" style="background-color: #333;">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+        <!-- End smartphone / tablet look -->
+    </div>
+
+    <div id="mobilecard">
+        {% for i in work_data %}
+        <div class="card mobilecard">
+            <div class="container">
+                <p>{{ i.assign_work_days }}</p>
+                <label for=""><strong>
+                        <h5>Complaint Description:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.complaint_des }}</p>
+
+                <label for=""><strong>
+                        <h5>Appointment Date:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.appointment_date }}</p>
+
+                <label for=""><strong>
+                        <h5>Device :</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.device }}</p>
+
+                <label for=""><strong>
+                        <h5>Lead Name:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.lead_id.name }}</p>
+
+                <label for=""><strong>
+                        <h5>Contact:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.lead_id.contact }}</p>
+
+                <label for=""><strong>
+                        <h5>Site Name:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.lead_id.site_name }}</p>
+
+                <label for=""><strong>
+                        <h5>Address:</h5>
+                    </strong> </label><br>
+                <p>{{ i.complaint_id.lead_id.shipping_address }}</p>
+
+                <p>{{ i.ctime }}</p>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    <script src="/static/js/saleshome.js"></script>
+</body>
+
+</html>

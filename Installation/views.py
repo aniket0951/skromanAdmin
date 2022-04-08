@@ -312,11 +312,13 @@ class UserAssignComplaints(ListView):
        
         for i in data:
             dates = i.datepublished()
-            two_dates = get_timedelta_compare(dates)
-            print(two_dates)    
+            two_dates = get_timedelta_compare(i.ctime)
+            print(two_dates)
+            i.assign_work_days = two_dates
 
         context['work_data'] = data
         context['department'] = 'Installation'
+
         return context
 
 

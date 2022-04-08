@@ -41,6 +41,9 @@ class ComplaintAssignModel(models.Model):
     ctime = models.DateTimeField(auto_now_add=True)
     uptime = models.DateTimeField(auto_now=True)
 
+    # show work day's assign
+    # assign_work_days = models.CharField(max_length=120, null=True, blank=True)
+
     class Meta:
         db_table = 'complaint_assign'
 
