@@ -1,6 +1,8 @@
+from gc import get_objects
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
+from h11 import Data
 from rest_framework.generics import *
 from rest_framework.mixins import *
 from django.contrib import messages
@@ -11,24 +13,31 @@ from SalesApp.models import LeadModel
 from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
-import datetime
-
+from datetime import date
+from rest_framework.decorators import action,api_view
+from common.Helper import  get_current_date, user_validation,get_timedelta_compare
 
 # Create your views here.
 # open a different pages of installation
+
+
 def OpenInstallation(request, tag):
     # context = {'department': 'Installation'}
-    if tag == 'installation':
-        return redirect('lead_list')
-    elif tag == 'adduser':
+
+    
+    if tag == 'adduser':
         return redirect('user_list')
     elif tag == 'addNewUser':
         context = {}
         context['department'] = 'Installation'
         context['edit'] = 'addForm'
         return render(request, 'AddNewUser.html', context)
+    if tag.work == 'installation_admin':
+        return redirect('lead_list')
+    elif tag.work == 'installation_user':
+        return redirect('user_assign_complaints', pk=tag.id)    
     else:
-        return HttpResponse("no matched tag")
+        return HttpResponse(f"no matched tag {tag.work}")
 
 
 def OpenAddComplaint(request, lead_id):
@@ -73,7 +82,8 @@ class InstallationPKClass(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
 
 # get all installation users
 class UserListView(ListView):
-    queryset = Users.objects.all().order_by('-id')
+    queryset = Users.objects.filter(
+        user_dept="Installation").all().order_by('-id')
     template_name = 'AddNewUser.html'
     context_object_name = 'users'
 
@@ -112,7 +122,7 @@ class LeadListView(ListView):
         enddate = self.request.GET.get('enddate')
         if startdate and enddate:
             data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate))).all()
-            context.update({"leads": data})    
+            context.update({"leads": data})
 
         return context
 
@@ -131,27 +141,29 @@ class ComplaintClass(CreateModelMixin, GenericAPIView):
 
 #  get all complaints
 class ComplaintListView(ListView):
-    queryset = ComplaintsModel.objects.filter(~Q(complaint_status="Assign")).all().order_by('-id')
+    queryset = ComplaintsModel.objects.filter(
+        ~Q(complaint_status="Assign")).all().order_by('-id')
     template_name = 'Complaints.html'
     context_object_name = 'complaints'
 
     def get_context_data(self, **kwargs):
         context = super(ComplaintListView, self).get_context_data(**kwargs)
         data = ComplaintSerializer(self.queryset, many=True)
-        user = Users.objects.filter(user_dept="Installation").all()
+        user = Users.objects.filter(user_dept="Installation", work="installation_user").all()
         context['users'] = user
         context['department'] = 'Installation'
         search = self.request.GET.get('search')
         if search:
             data = self.get_queryset().filter(Q(lead_id__site_name__icontains=search) | Q(lead_id__city__icontains=search)
-                                             | Q(lead_id__contact__icontains=search) | Q(device__icontains=search))\
-                                          .all()
+                                              | Q(lead_id__contact__icontains=search) | Q(device__icontains=search))\
+                .all()
             context.update({'complaints': data})
 
         startdate = self.request.GET.get('startdate')
         enddate = self.request.GET.get('enddate')
         if startdate and enddate:
-            data = self.get_queryset().filter(appointment_date__range=(startdate, enddate)).all()    
+            data = self.get_queryset().filter(
+                appointment_date__range=(startdate, enddate)).all()
             context.update({'complaints': data})
 
         return context
@@ -179,19 +191,18 @@ class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIVie
             messages.success(request, "Complaint details updated successfully")
             return redirect('complaints')
 
-        # assign the complaint
 
-
+# assign the complaint
 class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
-
 
     def post(self, request, *args, **kwargs):
         insert = self.create(request, *args, **kwargs)
         if insert:
             complaint_id = self.request.POST.get('complaint_id')
-            complaint_update = ComplaintsModel.objects.filter(id=complaint_id).update(complaint_status="Assign")
+            complaint_update = ComplaintsModel.objects.filter(
+                id=complaint_id).update(complaint_status="Assign")
 
         messages.success(request, "Complaint assigned successfully")
         return redirect('complaints')
@@ -204,9 +215,10 @@ class AssignComplaintListView(ListView):
     context_object_name = 'assign_complete'
 
     def get_context_data(self, **kwargs):
-        context = super(AssignComplaintListView, self).get_context_data(**kwargs)
+        context = super(AssignComplaintListView,
+                        self).get_context_data(**kwargs)
         # data = ComplaintSerializer(self.queryset, many=True)
-        user = Users.objects.filter(user_dept="Installation").all()
+        user = Users.objects.filter(user_dept="Installation", work="installation_user").all()
         context['users'] = user
         context['department'] = 'Installation'
         context["assign"] = "assign-show"
@@ -215,7 +227,8 @@ class AssignComplaintListView(ListView):
         search = self.request.GET.get('search')
         if search:
             data = self.get_queryset().filter(
-                Q(complaint_id__lead_id__name__icontains=search) | Q(complaint_id__lead_id__site_name__icontains=search)
+                Q(complaint_id__lead_id__name__icontains=search) | Q(
+                    complaint_id__lead_id__site_name__icontains=search)
                 | Q(complaint_id__lead_id__contact__icontains=search) | Q(complaint_id__lead_id__city__icontains=search)
                 | Q(complaint_id__appointment_date__icontains=search)) \
                 .all()
@@ -226,7 +239,8 @@ class AssignComplaintListView(ListView):
         startdate = self.request.GET.get('startdate')
         enddate = self.request.GET.get('enddate')
         if startdate and enddate:
-            data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate)) | Q(complaint_id__appointment_date__range=(startdate, enddate))).all()
+            data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate)) |
+                                              Q(complaint_id__appointment_date__range=(startdate, enddate))).all()
             context.update({"assign_complete": data})
 
         return context
@@ -238,9 +252,20 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
     serializer_class = ComplaintAssignSerializer
 
     def post(self, request, *args, **kwargs):
+        data = self.get_object()
+        user = get_object_or_404(Users, pk=self.request.data.get('user_id'))
+
         update = self.update(request, *args, **kwargs)
         if update:
-            messages.success(request, "Assign Engineer has been updated successfully")
+            assign_user_model = AssignedUsersModel()
+            assign_user_model.complaint_assign_id = data
+            assign_user_model.user_id = user
+            assign_user_model.old_user_id = data.user_id
+            assign_user_model.assigned_reason = self.request.data.get(
+                'assigned_reason')
+            assign_user_model.save()
+            messages.success(
+                request, "Assign Engineer has been updated successfully")
             return redirect('assign_complete')
 
     def get(self, request, *args, **kwargs):
@@ -252,3 +277,49 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
             "data": self.get_object()
         }
         return render(request, "Complaints.html", context)
+
+# get all old engineers data of complaint
+
+
+def GetAllOldEngineers(request, complaint_assign_id):
+    obj = AssignedUsersModel.objects.filter(
+        complaint_assign_id=complaint_assign_id).all()
+
+    context = {
+        "department": 'Installation',
+        "assign": "assign-show-old-user",
+        "users_data": obj
+    }
+
+    return render(request, "Complaints.html", context)
+
+# ------------------------ classes for  installation user ------------------------
+
+
+class UserAssignComplaints(ListView):
+    queryset = ComplaintAssignModel.objects.all().order_by('-id')
+    template_name = 'InstallationUserHome.html'
+    context_object_name = 'assign_complete'
+    
+
+    def get_context_data(self,*args, **kwargs):
+        context = super(UserAssignComplaints,
+                        self).get_context_data(**kwargs)  
+        data = self.get_queryset().filter(
+            user_id=self.kwargs['pk']).all().order_by('-id')
+     
+       
+        for i in data:
+            two_dates = get_timedelta_compare(i.ctime)
+            i.assign_work_days = two_dates
+
+        context['work_data'] = data
+        context['department'] = 'Installation'
+
+        pending_work = self.request.GET.get('pending_work')
+        print(pending_work)
+
+        return context
+
+
+ 

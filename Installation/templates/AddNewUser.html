@@ -49,7 +49,7 @@
 
             <div class="form-group" style="display: block;">
                 <label for="exampleInputPassword1">Work</label>
-                <input type="text" class="form-control" value="{{ data.work }}" name="work" id="weditork">
+                <input type="text" class="form-control" value="{{ data.work }}" name="work" id="weditork" readonly>
             </div>
 
             <div class="form-group">
@@ -146,7 +146,7 @@
 
     {% else %}
     <!-- show form of add new users -->
-    <div id="formdiv" class="container-fluid parentclass">
+    <div class="center hideform" id="dropdown-popup">
         <h4 style="text-align: center;">Add New Lead</h4>
         <img onclick="openUserData()"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAOZJREFUSEvt1dENgjAYBOBjA0dwAx1BN9FNdBQnUTfQDXQDRzCXtEnTtOH/j2JjAi/wQPm4aykDOh1DJxcL/LPm/67qFYA1gIdakZKY6DXAexX3whHdhqR3ADsltQfO0WdAP3PCTVG+qCVxc9QCz4KOwTnKuTwAsM7pG8CrNv+1qnNUWT9nACcFvgHYKGIYI8Ecy9QpzoqPjqpZs7vqGDTHuUVyt7LOc7Uw6+eUJm+CW+BS7ZNxK9wc98Al/BK+bffi98Ipzmv+maSFpsAR51lCx7ZMd32eAWpij1G8d4EnV2h9QLeqv/KyMB8qwdA1AAAAAElFTkSuQmCC" />
@@ -175,7 +175,7 @@
 
             <div class="form-group" style="display: block;">
                 <label for="exampleInputPassword1">Work</label>
-                <input type="text" class="form-control" name="work" id="work">
+                <input type="text" class="form-control" value="installation_user" name="work" id="work" readonly>
             </div>
 
             <div class="form-group">

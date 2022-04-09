@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,6 +18,7 @@
     <script src="path/to/lightbox.js"></script>
     <title>Skroman Support</title>
 </head>
+
 <body>
     <div class='container-fluid Logi_body'>
         <div class='row logi_main'>
@@ -26,27 +28,77 @@
             <div class='col-12 col-md-4 col-lg-4 pt-5 right_div'>
                 <img class="mx-auto d-block rounded" src="/static/image/skromanlogo.jpeg" alt='logo' />
                 <h1 class='text-center pt-3'>Login</h1>
-            <form action="{% url 'loginUser' %}">
-                <div class="mb-3 mt-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
-                </div>
-                <div class="mb-3" id="dropDown">
-                    <label for="pwd" class="form-label">Department:</label>
-    
-                    <select id="list" class="form-select" name="department" aria-label="Default select example">
-                        <option name="" selected>Select the Department</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Inventory">Inventory</option>
-                        <option value="Production">Production</option>
-                        <option value="Installation">Installation</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary mx-auto d-block btn-lg">Login</button>
-            </form>
+                <form action="{% url 'loginUser' %}">
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
+                    </div>
+                    <div class="mb-3" id="dropDown">
+                        <label for="pwd" class="form-label">Department:</label>
+
+                        <select id="list" class="form-select" name="department" aria-label="Default select example">
+                            <option name="" selected>Select the Department</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Inventory">Inventory</option>
+                            <option value="Production">Production</option>
+                            <option value="Installation">Installation</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mx-auto d-block btn-lg">Login</button>
+                </form>
             </div>
         </div>
-       </div>
+    </div>
+
+    <!-- handling messages -->
+    <div style="margin-top: 10px;">
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error"%}
+        <script>
+            swal({
+                icon: 'warning',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Next",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% else %}
+        <script>
+            swal({
+                icon: '/static/image/login_success.png',
+                text: '{{ message }}',
+                buttons: {
+                    cancel: "Cancel",
+                    catch: {
+                        text: "Done",
+                        value: "catch",
+                    }
+                },
+            })
+                .then((value) => {
+                    switch (value) {
+                        case "catch":
+                            break;
+                    }
+                });
+        </script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
 </body>
+
 </html>
