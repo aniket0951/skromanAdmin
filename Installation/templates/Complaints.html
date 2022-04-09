@@ -71,12 +71,13 @@
                                         <th scope="col">Time Slot</th>
                                         <th scope="col">Device</th>
                                         <th scope="col">Assigned Engineer</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for i in assign_complete %}
+                                    {% for i in assign_complete_data %}
                                     <tr>
                                         <td>Kolte Patil</td>
                                         <td>{{ i.complaint_id.lead_id.site_name }}</td>
@@ -86,7 +87,28 @@
                                         <td>{{ i.complaint_id.appointment_date }}</td>
                                         <td>{{ i.complaint_id.timeslot }}</td>
                                         <td>{{ i.complaint_id.device }}</td>
-                                        <td>{{ i.user_id.name }}</td>
+                                        <td>{{ i.user_id.name }}
+                                            {% if i.assign_work_days == 'Today' %}
+                                            <p style="color: green; font-weight: bold;">{{ i.assign_work_days }}</p>
+                                            {% elif i.assign_work_days == 'Yesterday' %}
+                                            <p style="color: orange; font-weight: bold;">{{ i.assign_work_days }}</p>
+                                            {% else %}
+                                            <p style="color: red; font-weight: bold;">{{ i.assign_work_days }}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if i.is_status == 1%}
+                                            <p style="font-weight: bold;">Assigned</p>
+                                            {% elif i.is_status == 2 %}
+                                            <p style="font-weight: bold;">Receive</p>
+                                            {% elif i.is_status == 3 %}
+                                            <p style="font-weight: bold;">Working</p>
+                                            {% elif i.is_status == 4 %}
+                                            <p style="font-weight: bold;">Pending</p>
+                                            {% elif i.is_status == 5 %}
+                                            <p style="font-weight: bold;">Completed</p>
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             <form action="{% url 'update_assignee' i.id %}">
                                                 <button class="btn btn-primary btn-sm">Change Engineer</button>
@@ -188,6 +210,12 @@
                 <label for="lname">Engineer Change Reason:</label>
                 <input type="text" class="form-control" 
                     name="assigned_reason" id="appointment_date" required>
+            </div>
+
+            <div style="display: none;" class="form-group">
+                <label for="lname">Engineer Change Reason:</label>
+                <input type="text" class="form-control" 
+                    name="is_status" value="{{ data.is_status }}" id="appointment_date" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>

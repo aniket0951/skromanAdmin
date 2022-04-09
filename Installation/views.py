@@ -1,5 +1,6 @@
 from gc import get_objects
 from multiprocessing import context
+from turtle import update
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
 from h11 import Data
@@ -217,11 +218,11 @@ class AssignComplaintListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(AssignComplaintListView,
                         self).get_context_data(**kwargs)
-        # data = ComplaintSerializer(self.queryset, many=True)
         user = Users.objects.filter(user_dept="Installation", work="installation_user").all()
         context['users'] = user
         context['department'] = 'Installation'
         context["assign"] = "assign-show"
+        context['assign_complete_data'] = None
 
         # search by placeholder
         search = self.request.GET.get('search')
@@ -233,7 +234,7 @@ class AssignComplaintListView(ListView):
                 | Q(complaint_id__appointment_date__icontains=search)) \
                 .all()
 
-            context.update({"assign_complete": data})
+            context.update({"assign_complete_data": data})
 
         # date filter searching
         startdate = self.request.GET.get('startdate')
@@ -241,7 +242,19 @@ class AssignComplaintListView(ListView):
         if startdate and enddate:
             data = self.get_queryset().filter(Q(ctime__date__range=(startdate, enddate)) |
                                               Q(complaint_id__appointment_date__range=(startdate, enddate))).all()
-            context.update({"assign_complete": data})
+            context.update({"assign_complete_data": data})
+
+        if context['assign_complete_data'] is None:
+            context['assign_complete_data'] = self.get_queryset()
+            print("data added from none condition")
+
+
+        # get assign work days
+        for i in context['assign_complete_data']:
+            two_dates = get_timedelta_compare(i.uptime)
+            i.assign_work_days = two_dates
+
+    
 
         return context
 
@@ -250,6 +263,8 @@ class AssignComplaintListView(ListView):
 class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
+
+    update_msg = "Assign Engineer has been updated successfully"
 
     def post(self, request, *args, **kwargs):
         data = self.get_object()
@@ -265,7 +280,7 @@ class UpdateAssignComplaint(UpdateModelMixin, RetrieveModelMixin, GenericAPIView
                 'assigned_reason')
             assign_user_model.save()
             messages.success(
-                request, "Assign Engineer has been updated successfully")
+                request, self.update_msg)
             return redirect('assign_complete')
 
     def get(self, request, *args, **kwargs):
@@ -315,11 +330,17 @@ class UserAssignComplaints(ListView):
 
         context['work_data'] = data
         context['department'] = 'Installation'
-
-        pending_work = self.request.GET.get('pending_work')
-        print(pending_work)
-
         return context
 
+# receive the complaint or change complaint status by installation user
+def receiveWork(request, complaint_assign_id, user_id):
+    queryset = ComplaintAssignModel.objects.filter(id=complaint_assign_id).first()
+    queryset.is_status = 2
+    queryset.save()
 
+
+    if queryset:
+        return redirect('user_assign_complaints', pk=user_id) 
+    
+    return redirect('user_assign_complaints', pk=user_id)    
  

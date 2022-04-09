@@ -105,6 +105,7 @@ def strptime_format_date(input):
 def get_timedelta_compare(date2):
     current_date = get_current_date()
     
+
     f_date =  date(current_date.year, current_date.month, current_date.day)
     l_date = date(date2.year, date2.month, date2.day)
 

@@ -41,7 +41,9 @@ urlpatterns = [
 
     # ----------------- installation user ------------------------
     path('UserAssignComplaints/<int:pk>/', UserAssignComplaints.as_view(), name='user_assign_complaints'),
-  
+
+    # receive work from admin user
+    path('receiveWork/<int:complaint_assign_id>/<int:user_id>/', receiveWork, name="receive_work"),  
 
 ]
 

@@ -131,6 +131,7 @@
             margin: auto;
             margin-top: 10px;
         }
+
         .sidebar {
             display: none;
         }
@@ -230,7 +231,7 @@
                     <input type="submit" name="pending_work", value="Pending Work">
                 </form> -->
                 <a name="pending_work" href="{% url 'user_assign_complaints' work_data.0.user_id_id %}">
-                Pending Work</a>
+                    Pending Work</a>
                 <a href="{% url 'leadhome' %}">Lead</a>
                 <a href="{% url 'usermodes' 'openaddlead' %}">Add Lead</a>
             </div>
@@ -242,11 +243,11 @@
     </div>
 
     <div id="mobilecard">
-        
+
         {% for i in work_data %}
         <div class="card mobilecard">
             <div class="container">
-                
+
                 {% if i.assign_work_days == 'Yesterday' %}
                 <p style="color: orange;  font-weight: bold;">{{ i.assign_work_days }}</p>
                 {% elif i.assign_work_days == 'Today' %}
@@ -290,10 +291,15 @@
                 <p>{{ i.complaint_id.lead_id.shipping_address }}</p>
 
                 <p>{{ i.ctime }}</p>
-
+                {% if i.is_status == 1 %}
+                <form action="{% url 'receive_work' i.id i.user_id_id %}">
+                    <button type="submit" class="btn btn-primary">Receive Work</button>
+                </form>
+                {% else %}
                 <form action="#">
                     <button type="submit" class="btn btn-primary">Update Work</button>
                 </form>
+                {% endif %}
                 
             </div>
         </div>
