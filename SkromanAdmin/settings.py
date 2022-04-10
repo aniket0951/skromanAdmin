@@ -12,6 +12,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+root = environ.Path(__file__) - 2
+# set default values and casting
+env = environ.Env(DEBUG=(bool, True),)
+# reading .env file
+environ.Env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,9 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+API_SECRET_KEY = env('API_SECRET_KEY')
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-wgh3eal_dyv5v0grd9$nwc$r@b*+hn(d!_-=e87!axckxih7(y'
+# SECRET_KEY = 'django-insecure-wgh3eal_dyv5v0grd9$nwc$r@b*+hn(d!_-=e87!axckxih7(y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,13 +89,13 @@ WSGI_APPLICATION = 'SkromanAdmin.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'skroman_admin',
-        'HOST': 'skora-db.ckwveljlsuux.ap-south-1.rds.amazonaws.com',
-        'PORT': '3306',
-        'USER': 'admin',
-        'PASSWORD': 'skora1234'
+     'default': {
+        'ENGINE': env('SKROMAN_DB_ENGINE'),
+        'NAME': env('SKROMAN_DB_NAME'),
+        'HOST': env('SKROMAN_DB_HOST'),
+        'PORT': env('SKROMAN_DB_PORT'),
+        'USER': env('SKROMAN_DB_USER_NAME'),
+        'PASSWORD': env('SKROMAN_DB_PASSWORD')
     }
 }
 
