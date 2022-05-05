@@ -27,4 +27,6 @@ urlpatterns = [
 
     # installation app urls-------this url valid only for installation app functionalities
     path('installation/', include('Installation.installationurl')),
+
+    path('production/', include('Production.productionurls')),
 ]

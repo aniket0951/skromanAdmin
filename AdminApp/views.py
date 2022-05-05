@@ -1,3 +1,4 @@
+import imp
 from django.shortcuts import render, redirect
 from common.Helper import *
 from .models import *
@@ -6,6 +7,8 @@ from django.contrib import messages
 from django.http import *
 from SalesApp.views import *
 from Installation.views import *
+from Inventory.views import *
+from Production.views import *
 
 # Create your views here.
 # OpenSkroman firstly checks the login user with cookie system, if new user then provides new credentials(cookies) else matches
@@ -26,12 +29,12 @@ def LoginUser(request):
     department = request.GET.get('department')
     otp = request.GET.get('otp')
 
-    # check all params
+    # check all params1
     if IsValidParam(department, request) and IsValidParam(email, request):
 
         # check user is register or not
         user = Users.objects.filter(email=email, user_dept=department)
-        if department == 'Production' or department == 'Sales' or department == 'Installation':
+        if department == 'Production' or department == 'Sales' or department == 'Installation' or department == 'Inventory' :
             return navigateScreen(request, department, email)
 
         if user:
@@ -68,10 +71,10 @@ def navigateScreen(request, department, email):
         response.set_cookie('loginStatus', "Login")
         response.set_cookie('department', department)
         return response
-    elif department == "Inventory":
-        pass
+    elif department == 'Inventory':
+        return Add_BOM(request)
     elif department == 'Production':
-        return HttpResponse("Production")
+        return Production_Request(request)
     elif department == 'Sales':
         return OpenUserModes(request, 'openmode')
     elif department == 'Installation':
@@ -79,7 +82,7 @@ def navigateScreen(request, department, email):
         if user:
             return OpenInstallation(request,user)
         else:
-            messages.error(request, "Unautheraised user. Please provide a authentication details")
+            messages.error(request, "Unauthorised user. Please provide a authentication details")
             return render(request, "Login.html")     
              
     # elif department == 'Production':

@@ -14,6 +14,7 @@ from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
 from datetime import date
+
 from rest_framework.decorators import action,api_view
 from common.Helper import  get_current_date, user_validation,get_timedelta_compare
 
@@ -103,7 +104,7 @@ class UserListView(ListView):
 
 # get all leads details
 class LeadListView(ListView):
-    queryset = LeadModel.objects.all().order_by('-id')
+    queryset = LeadModel.objects.all().order_by('id')
     template_name = 'InstallationHome.html'
     context_object_name = 'leads'
 

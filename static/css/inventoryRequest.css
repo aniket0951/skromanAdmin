@@ -1,0 +1,55 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.Inventory_Main{
+    width: 70%;
+    height: auto;
+    margin-top: 10px;
+    margin: 0 auto;
+}
+.Inventory_Main .Inv_button{
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.request_div{
+    text-align: center;
+}
+
+.request_div .don_div{
+    padding-top: 10px;
+    margin-right: 55px;
+}
+
+
+.request_div .bom_div{
+    padding-top: 10px;
+    margin-right: 80px;
+}
+
+.request_div .mod2_div, .mod4_div, .mod6_div, .mod8_div {
+    padding-top: 10px;
+    margin-right: 25px;
+}
+
+.request_div .ord_div {
+    padding-top: 10px;
+    margin-right: 155px;
+
+}
+
+.request_div .sub_can_div {
+    padding-top: 20px;
+}
+.sub_can_div button{
+    width: 100px;
+    border-radius: 20px;
+}
+.sub_can_div .sub:hover, .sub_can_div .can:hover{
+    background-color: aliceblue;
+    color: black;
+}

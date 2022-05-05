@@ -10,7 +10,7 @@ class LeadModel(models.Model):
     name = models.CharField(max_length=40, null=True, blank=True)
     contact = models.CharField(max_length=40, null=True, blank=True)
     email = models.EmailField(max_length=254)
-    ctime = models.DateTimeField(auto_now_add=True)
+    ctime = models.DateTimeField(auto_now_add=True) 
     uptime = models.DateTimeField(auto_now=True)
     billing_address = models.CharField(max_length=140, null=True, blank=True)
     shipping_address = models.CharField(max_length=140, null=True, blank=True)

@@ -1,0 +1,2589 @@
+{% include 'CommonTemp.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/bom.css">
+    <link rel="stylesheet" href="/static/css/inventoryRequest.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Production</title>
+</head>
+
+<body>
+    <div class="Inventory_Main">
+        <div class="row mb-2">
+            <div class="d-flex justify-content-between">
+                <h4>Guruprasad Patil</h4>
+                <button class="Inv_button btn btn-primary p-2">Time Start</button>
+            </div>
+        </div>
+        <div class="row request_Blog">
+            <div class="container">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#request">Request</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " data-bs-toggle="tab" href="#soldering">Soldering</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#visualinspection">Visual Inspection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#programming">Programming</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#testing">Testing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#finaltesting">Final Testing</a>
+                    </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content ">
+                    <div id="request" class="active tab-pane"><br>
+                        <div class="container request_div">
+                            <div class="req_div">
+                                <span>Request :</span>
+                                <button class="btn btn-success ms-4"><i
+                                        class="fa-solid fa-square-check p-1"></i>Accept</button>
+                                <button class="btn btn-danger ms-4"><i
+                                        class="fa-solid fa-circle-xmark p-1"></i>Reject</button>
+                            </div>
+                            <div class="don_div">
+                                <span>Download Quotation :</span>
+                                <button class="btn btn-primary "><i
+                                        class="fa-solid fa-download p-1"></i>Download</button>
+                                <button class="btn btn-primary ms-4"><i class="fa-solid fa-eye p-1"></i>View</button>
+                            </div>
+                            <!-- <div class="bom_div">
+                                <span>BOM :</span>
+                                <input type="checkbox" class="" id="check1" name="option1" value="something">
+                                <label class="form-check-label" for="check1">Yes</label> &nbsp;&nbsp;
+                                <input type="checkbox" class="" id="check2" name="option2" value="something">
+                                <label class="form-check-label" for="check2">No</label>
+                            </div> -->
+
+
+                            <div class="w-50">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Device</td>
+                                            <td>Quantity</td>
+                                            <td>BOM Verify </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>2 MODULE :</span></td>
+                                            <td><input type="text" class="" id="check1"></td>
+                                            <td><input type="checkbox" style="width: 60px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>6 MODULE :</span></td>
+                                            <td><input type="text" class="" id="check1"></td>
+                                            <td><input type="checkbox" style="width: 60px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>6 MODULE :</span></td>
+                                            <td><input type="text" class="" id="check1"></td>
+                                            <td><input type="checkbox" style="width: 60px;"></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>8 MODULE :</span></td>
+                                            <td><input type="text" class="" id="check1"></td>
+                                            <td><input type="checkbox" style="width: 60px;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- 
+                            <div class="mod2_div">
+                                
+                            </div>
+                            <div class="mod4_div">
+                                <span>4 MODULE :</span>
+                                <input type="text" class="" id="check1">
+                                <label class="form-check-label" for="check1"></label>
+                            </div>
+                            <div class="mod6_div">
+                                <span>6 MODULE :</span>
+                                <input type="text" class="" id="check1">
+                                <label class="form-check-label" for="check1"></label>
+                            </div>
+                            <div class="mod8_div">
+                                <span>8 MODULE :</span>
+                                <input type="text" class="" id="check1">
+                                <label class="form-check-label" for="check1"></label>
+                            </div>-->
+                            <div class="ord_div">
+                                <span>Order Confirm :</span>
+                                <input type="checkbox" class="" id="check1" name="option1" value="something">
+                                <label class="form-check-label" for="check1">Yes</label>
+                                <input type="checkbox" class="" id="check2" name="option2" value="something">
+                                <label class="form-check-label" for="check2">No</label>
+                            </div>
+                            <div>
+                                <span>Send for Soldering</span>
+                                <input type="checkbox" class="" id="check1" name="option1" value="something">
+                            </div>
+                            <div class="sub_can_div">
+                                <button class="sub btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="can btn btn-primary">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="soldering" class="tab-pane"><br>
+                        <div class="container">
+
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <!-- ################################################# Visualinspection     ################ -->
+                                    <tr>
+                                        <th scope="col">Sr.No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Module Name</th>
+                                        <th scope="col">PCB Type</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">PCB Barcode</th>
+                                        <th scope="col">Work Status</th>
+                                        <th scope="col">Send to Visual Inspection</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>28/04/2022</td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Yes</label>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">No</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>29/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Yes</label>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">No</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Yes</label>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">No</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Yes</label>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">No</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Yes</label>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">No</label>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="visualinspection" class="tab-pane"><br>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-light">
+
+                                    <tr>
+                                        <!--#######################################Third page - Visualinspection ##################################### -->
+                                        <th scope="col">Sr.No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Module Name</th>
+                                        <th scope="col">PCB Type</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Problem</th>
+                                        <th scope="col">Problem By</th>
+                                        <th scope="col">Work Status</th>
+                                        <th scope="col">Send to Programming</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>28/04/2022</td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Ok">Ok</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select name="module" style="width:110px;" id="module">
+                                                <option value="Other">Other</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select name="module" style="width:100px;" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>29/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        <td>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Ok">Ok</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select name="module" style="width:110px;" id="module">
+                                                <option value="Other">Other</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select name="module" style="width:100px;" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        <td>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Ok">Ok</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select name="module" style="width:110px;" id="module">
+                                                <option value="Other">Other</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select name="module" style="width:100px;" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        <td>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Ok">Ok</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select name="module" style="width:110px;" id="module">
+                                                <option value="Other">Other</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select name="module" style="width:100px;" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        <td>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Ok">Ok</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:110px;" name="module" id="module">
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                                <option value="Other">Other</option>
+
+                                            </select><br>
+                                            <select name="module" style="width:110px;" id="module">
+                                                <option value="Other">Other</option>
+                                                <option value="Dry Solder">Dry Solder</option>
+                                                <option value="Ok">Ok</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:100px;" name="module" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select><br>
+                                            <select name="module" style="width:100px;" id="module">
+                                                <option value="Not Found">Not Found</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="programming" class="tab-pane"><br>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <!--##################################   Programming  ################################################ -->
+                                        <th scope="col">Sr.No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Module Name</th>
+                                        <th scope="col">PCB Type</th>
+                                        <th scope="col">IC</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Work Status</th>
+                                        <th scope="col">Send to Testing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>28/04/2022</td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select><br>
+                                            <select name="module" style="width:115px;" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>29/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select><br>
+                                            <select name="module" style="width:115px;" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select><br>
+                                            <select name="module" style="width:115px;" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select><br>
+                                            <select name="module" style="width:115px;" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+
+                                            </select><br>
+                                            <select class="mb-2" style="width:115px;" name="module" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select><br>
+                                            <select name="module" style="width:115px;" id="module">
+                                                <option value="ATMEGA-16">ATMEGA-16</option>
+                                                <option value="ATMEGA-328">ATMEGA-328</option>
+                                                <option value="ESP">ESP</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="testing" class="tab-pane"><br>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <!-- ####################################### Testing ################################################# -->
+                                    <tr>
+                                        <th scope="col">Sr.No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Module Name</th>
+                                        <th scope="col">PCB Type</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Work Status</th>
+                                        <th scope="col">Send to Final Testing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>28/04/2022</td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>29/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            <select name="module" style="width:70px;" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="finaltesting" class="tab-pane"><br>
+                        <div class="container">
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <!-- ################################ Final Testing ############################################ -->
+                                    <tr>
+                                        <th scope="col">Sr.No</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Module Name</th>
+                                        <th scope="col">PCB Type</th>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Work Status</th>
+                                        <th scope="col">Send to Dispatch</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>28/04/2022</td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select>
+
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                          
+                                        </td>
+                                        
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>29/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                           
+                                        </td>
+                                        
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                            
+                                        </td>
+                                       
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                          
+                                        </td>
+                                       
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>30/04/2022</td>
+                                        <td><select name="module" id="module">
+                                                <option value="23000">23000</option>
+                                                <option value="44010">44010</option>
+                                                <option value="45000">45000</option>
+                                                <option value="46000">46000</option>
+                                                <option value="65010">65010</option>
+                                                <option value="67000">67000</option>
+                                                <option value="87010">87010</option>
+                                                <option value="89000">89000</option>
+                                                <option value="88020">88020</option>
+                                            </select></td>
+                                        <td>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="Touch-2M">Touch-2M</option>
+                                                <option value="Touch-4M">Touch-4M</option>
+                                                <option value="Touch-6M">Touch-6M</option>
+                                                <option value="Touch-8M">Touch-8M</option>
+                                                <option value="Touch-88020">Touch-88020</option>
+                                            </select><br>
+                                            <select class="mb-2" name="module" id="module">
+                                                <option value="MCU-23000">MCU-23000</option>
+                                                <option value="MCU-44010">MCU-44010</option>
+                                                <option value="MCU-45000">MCU-45000</option>
+                                                <option value="MCU-46000">MCU-46000</option>
+                                                <option value="MCU-65010">MCU-65010</option>
+                                                <option value="MCU-67000">MCU-67000</option>
+                                                <option value="MCU-87010">MCU-87010</option>
+                                                <option value="MCU-89000">MCU-89000</option>
+                                                <option value="MCU-88020">MCU-88020</option>
+                                            </select><br>
+                                            <select name="module" id="module">
+                                                <option value="Relay-23000">Relay-23000</option>
+                                                <option value="Relay-44010">Relay-44010</option>
+                                                <option value="Relay-45000">Relay-45000</option>
+                                                <option value="Relay-46000">Relay-46000</option>
+                                                <option value="Relay-65010">Relay-65010</option>
+                                                <option value="Relay-67000">Relay-67000</option>
+                                                <option value="Relay-87010">Relay-87010</option>
+                                                <option value="Relay-89000">Relay-89000</option>
+                                                <option value="Relay-88020">Relay-88020</option>
+
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="mb-2" style="width:70px;" name="module" id="module">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select><br>
+                                       
+                                        </td>
+                                       
+                                        <td>
+                                            <input type="checkbox" class="" id="check1" name="option1"
+                                                value="something">
+                                            <label class="form-check-label" for="check1">Complete</label><br>
+                                            <input type="checkbox" class="" id="check2" name="option2"
+                                                value="something">
+                                            <label class="form-check-label" for="check2">Working</label>
+                                        </td>
+                                        <td>
+                                            <button class="can btn btn-primary">Send</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

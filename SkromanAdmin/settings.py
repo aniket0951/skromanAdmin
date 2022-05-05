@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'SalesApp',
     'AdminApp', 
     'Installation',
+    'Inventory',
+    'Production',
 ]
 
 MIDDLEWARE = [
