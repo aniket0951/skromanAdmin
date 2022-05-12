@@ -74,7 +74,12 @@ def navigateScreen(request, department, email):
     elif department == 'Inventory':
         return Add_BOM(request)
     elif department == 'Production':
-        return Production_Request(request)
+        user_prod = production_user_validation(request, "Production", email)
+        if user_prod:
+            return OpenProduction(request,user_prod)
+        else:
+            messages.error(request, "Unauthorised user. Please provide a authentication details guru ")
+            return render(request, "Login.html")            
     elif department == 'Sales':
         return OpenUserModes(request, 'openmode')
     elif department == 'Installation':

@@ -4,7 +4,8 @@ from .views import *
 
 urlpatterns = [
     #  to open a skroman 
-    path('openskroman/', OpenSkroman),
+    # path('openskroman/', OpenSkroman),
+    path('', OpenSkroman),
     path('loginUser/', LoginUser, name="loginUser"),
 
 ]

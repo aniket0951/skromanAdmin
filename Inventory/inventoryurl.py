@@ -4,8 +4,8 @@ from Inventory.views import *
 urlpatterns = [
     
 
-    path('Add_BOM/',Add_BOM, name='Add_BOM' ),
+    path('Add_BOM',Add_BOM.as_view(), name='Add_BOM' ),
 
-    path('InventoryHome/',InventoryHome.as_view(), name='InventoryHome' ),
+    path('InventoryHome/',OpenUser.as_view(), name='InventoryHome' ),
 
 ]

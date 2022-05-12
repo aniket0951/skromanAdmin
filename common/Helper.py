@@ -66,6 +66,10 @@ def user_validation(request, tag, email):
             print("user not found")
             return admin_user_validation(request, "Installation", email)
 
+
+
+
+
 # email validation for admin user
 
 
@@ -76,6 +80,25 @@ def admin_user_validation(request, tag, email):
             return user
         except Users.DoesNotExist:
             return False
+
+def production_user_validation(request, tag, email):
+    if tag == "Production":
+        try:
+            user = Users.objects.get(email=email, work="production_user")
+            return user
+        except Users.DoesNotExist:
+            print("user not found")
+            return admin_user_validation(request, "Production", email)
+
+def prod_admin_user_validation(request, tag, email):
+    if tag == "Production":
+        try:
+            user = Users.objects.get(email=email, work="production_admin")
+            return user
+        except Users.DoesNotExist:
+            return False
+
+
 
 # convert a datetime into date
 
