@@ -54,7 +54,7 @@ class LeadListView(ListView):
 
 
 def OpenProduction(request, tag):
-    # context = {'department': 'Installation'}
+    # context = {'department': 'Production'}
     if tag == 'adduser':
         return redirect('user_list')
     elif tag == 'addNewUser':
