@@ -72,13 +72,13 @@ def navigateScreen(request, department, email):
         response.set_cookie('department', department)
         return response
     elif department == 'Inventory':
-        return Add_BOM(request)
+        return BOM_list(request)
     elif department == 'Production':
         user_prod = production_user_validation(request, "Production", email)
         if user_prod:
             return OpenProduction(request,user_prod)
         else:
-            messages.error(request, "Unauthorised user. Please provide a authentication details guru ")
+            messages.error(request, "Unauthorised user. Please provide a authentication details")
             return render(request, "Login.html")            
     elif department == 'Sales':
         return OpenUserModes(request, 'openmode')

@@ -30,6 +30,9 @@ def OpenUser(request, tag):
 
 def Add_BOM(request): 
     return render(request, 'Add_BOM.html')
+    
+def BOM_list(request): 
+    return render(request, 'Bom_list.html')
 
 def InventoryHome(request):
     queryset = LeadModel.objects.all().order_by('-id')

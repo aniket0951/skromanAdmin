@@ -130,13 +130,16 @@
 
         {% elif department == 'ProductionMembers' %}
         <a class="active" href="#">Member</a>
+        {% elif department == 'Inventory' %}
+       
         {% else %}
         <a class="active" href="#">HOME</a>
         <a href="#">CREATE USER</a>
         <a href="#">LEADS</a>
+      
         <a href="#about">TRACK</a>
         <a href="{% url 'client_details' %}">SALES</a>
-        <a href="#">INVENTORY</a>
+    
         <a href="{% url 'Production_Request' %}">PRODUCTION</a>
         <a href="#about" id="account">ACCOUNT</a>
         <a href="#about">INSTALLATION</a>
