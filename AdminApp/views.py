@@ -72,7 +72,7 @@ def navigateScreen(request, department, email):
         response.set_cookie('department', department)
         return response
     elif department == 'Inventory':
-        return BOM_list(request)
+        return Add_BOM(request)
     elif department == 'Production':
         user_prod = production_user_validation(request, "Production", email)
         if user_prod:

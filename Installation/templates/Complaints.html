@@ -306,7 +306,7 @@
                                                     style="display: none;">
                                                 <input type="text" name="complaint_id" value="{{ i.id }}"
                                                     style="display: none;">
-                                                <input type="text" name="is_status" value="Assign">    
+                                                <input type="text" name="is_status" value="1" style="display:none;">    
                                                 <button type="submit" class="btn btn-primary">Assign</button>
 
                                             </form>
@@ -334,7 +334,6 @@
         function SelectUser() {
             var user = document.getElementById("users").value;
             document.getElementById("user_id1").value = user
-            // alert(x)
 
 
         }
