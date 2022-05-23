@@ -58,7 +58,8 @@
                 <div class="tab-content" style="margin-top: -10px;">
                     <!-- Sales Department -->
                     <div class="table_parent_div  tab-pane active" id="new">
-                        <div class="basic_info_card table_card" id="menu3">
+                        <div class="basic_info_
+                        card table_card" id="menu3">
                             <table class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
@@ -333,7 +334,7 @@
                                                     style="display: none;">
                                                 <input type="text" name="complaint_id" value="{{ i.id }}"
                                                     style="display: none;">
-                                                <input type="text" name="is_status" value="Assign">    
+                                                <input type="text" name="is_status" value="1" style="display:none;">    
                                                 <button type="submit" class="btn btn-primary">Assign</button>
 
                                             </form>
@@ -361,7 +362,6 @@
         function SelectUser() {
             var user = document.getElementById("users").value;
             document.getElementById("user_id1").value = user
-            // alert(x)
 
 
         }

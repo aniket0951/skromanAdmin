@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-wgh3eal_dyv5v0grd9$nwc$r@b*+hn(d!_-=e87!axckxih7(y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*' ,'your_server_domain_or_IP', 'second_domain_or_IP']
 
-
+ 
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     'SalesApp',
     'AdminApp', 
     'Installation',
+    'Inventory',
+    'Production',
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

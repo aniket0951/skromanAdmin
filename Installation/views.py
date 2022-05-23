@@ -15,6 +15,7 @@ from .models import *
 from .inst_serilizer import *
 from django.db.models import Q
 from datetime import date
+
 from rest_framework.decorators import action,api_view
 from common.Helper import  get_current_date, user_validation,get_timedelta_compare
 
@@ -104,7 +105,7 @@ class UserListView(ListView):
 
 # get all leads details
 class LeadListView(ListView):
-    queryset = LeadModel.objects.all().order_by('-id')
+    queryset = LeadModel.objects.all().order_by('id')
     template_name = 'InstallationHome.html'
     context_object_name = 'leads'
 
@@ -197,6 +198,18 @@ class UpdateComplaintDetails(RetrieveModelMixin, UpdateModelMixin, GenericAPIVie
 class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView):
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
+
+
+    def get_queryset(self):
+        qs =  super().get_queryset()
+        print("From wuery set")
+        print(self.request.POST['user_is'])
+        user_id = self.request.data.post('user_id')
+
+        if not user_id:
+            messages.error(self.request, "Please try to assign a first complaint first")
+
+            return redirect('complaints')
 
     def post(self, request, *args, **kwargs):
         insert = self.create(request, *args, **kwargs)

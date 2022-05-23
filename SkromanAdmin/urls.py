@@ -23,8 +23,11 @@ urlpatterns = [
     path('sales/', include('SalesApp.salesurl')),
 
     # admin app urls-------this url valid only for admin app functionalities
-    path('adminapp/', include('AdminApp.adminurl')),
+    # path('adminapp/', include('AdminApp.adminurl')),
+    path('', include('AdminApp.adminurl')),
 
     # installation app urls-------this url valid only for installation app functionalities
     path('installation/', include('Installation.installationurl')),
+
+    path('production/', include('Production.productionurls')),
 ]
