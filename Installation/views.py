@@ -1,5 +1,6 @@
 from gc import get_objects
 from multiprocessing import context
+from re import S
 from turtle import update
 from django.shortcuts import redirect, render
 from django.http import JsonResponse, HttpResponse
@@ -199,19 +200,12 @@ class ComplaintAssignClass(RetrieveModelMixin, CreateModelMixin, GenericAPIView)
     queryset = ComplaintAssignModel.objects.all()
     serializer_class = ComplaintAssignSerializer
 
-
-    def get_queryset(self):
-        qs =  super().get_queryset()
-        print("From wuery set")
-        print(self.request.POST['user_is'])
-        user_id = self.request.data.post('user_id')
-
+    def post(self, request, *args, **kwargs):
+        user_id = self.request.POST.get('user_id')
         if not user_id:
             messages.error(self.request, "Please try to assign a first complaint first")
-
             return redirect('complaints')
 
-    def post(self, request, *args, **kwargs):
         insert = self.create(request, *args, **kwargs)
         if insert:
             complaint_id = self.request.POST.get('complaint_id')
