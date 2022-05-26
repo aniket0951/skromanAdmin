@@ -1,7 +1,29 @@
 .BOM_add{
     width: 100%;
-    padding-top: 90px;
+    padding-top: 60px;
     margin-left: 50px;
+    /* overflow-x: hidden; */
+}
+.BOM_add .btn_div button{
+    width: 120px;
+}
+.BOM_add .btn_div .btn_submit{
+    border: 1px solid white;
+    background-color: blue;
+    color: white;
+}
+.BOM_add .btn_div .btn_submit:hover{
+    border: 1px solid blue;
+    background-color: white;
+    color: black;
+}
+.BOM_add .btn_div .btn_cancel{
+    border: 1px solid blue;
+}
+.BOM_add .btn_div .btn_cancel:hover{
+    border: 1px solid white;
+    background-color: blue;
+    color: white;
 }
 .List_BOM{
     width: 100%;
